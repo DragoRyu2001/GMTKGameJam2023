@@ -50,15 +50,17 @@ public class WeaponAim : MonoBehaviour
 
     public void StartFiring()
     {
-        foreach (Weapon w in weaponList)
+        for (int i = 0; i < weaponList.Count; i++)
         {
+            Weapon w = weaponList[i];
             w.StartFiring();
         }
     }
     public void StopFiring()
     {
-        foreach (Weapon w in weaponList)
+        for (int i = 0; i < weaponList.Count; i++)
         {
+            Weapon w = weaponList[i];
             w.StopFiring();
         }
     }
