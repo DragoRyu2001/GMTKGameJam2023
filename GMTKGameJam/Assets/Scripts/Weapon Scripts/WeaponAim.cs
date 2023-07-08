@@ -76,7 +76,7 @@ public class WeaponAim : MonoBehaviour
             weaponList.Add(weapon);
 
         }
-        weapon.onDecay += RemoveWeapon;
+        weapon.OnDecay += RemoveWeapon;
         phaseDiff = 2f * Mathf.PI / weaponList.Count;
         print(phaseDiff * Mathf.Rad2Deg);
     }

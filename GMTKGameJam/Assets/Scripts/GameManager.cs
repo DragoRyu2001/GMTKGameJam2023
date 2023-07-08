@@ -9,13 +9,12 @@ using Random = UnityEngine.Random;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Player PlayerPrefab;
-    //[SerializeField] private List<Enemy> EnemyPrefabs;
+    [SerializeField] private WeightedRandom<Enemy> EnemyPrefabs;
     [SerializeField] private NumberRange SpawnRange;
     [Range(0.1f, 10)]
     [SerializeField] 
     private float InitialTime;
 
-    [SerializeField] private WeightedRandom<Enemy> EnemyPrefabs;
     public Transform PlayerTransform { get; private set; }
     public Action PlayerDeath;
 
@@ -24,7 +23,7 @@ public class GameManager : MonoBehaviour
         get
         {
             var totalEnemies = _activeEnemies.Count;
-            return Mathf.Lerp(0.25f, 0.1f, (float)totalEnemies/20);
+            return Mathf.Lerp(0.25f, 0.1f, (float)totalEnemies/10);
         }
     }
     

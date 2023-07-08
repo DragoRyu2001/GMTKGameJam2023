@@ -12,18 +12,18 @@ namespace Entities
         protected WeaponAim WeaponAimSystem;
         protected List<Weapon> AvailableWeapons = new();
         
-        private float _health;
+        protected float Health;
         private bool _canUpdate;
         public void TakeDamage(float damage)
         {
-            _health -= damage;
-            if (_health <= 0)
+            Health -= damage;
+            if (Health <= 0)
                 Kill();
         }
 
         public void TakeHeal(float health)
         {
-            _health += health;
+            Health += health;
         }
 
         public void Kill()
@@ -34,14 +34,15 @@ namespace Entities
         private void Update()
         {
             if (!_canUpdate) return;
+            Debug.Log("Updating: "+_canUpdate);
             MovementLogic();
             DamageLogic();
             PickUpWeapon();
         }
 
-        public virtual void SetData()
+        protected virtual void SetData()
         {
-            _health = CharacterSo.BaseHealth;
+            Health = CharacterSo.BaseHealth;
             if (TryGetComponent(out WeaponAim aim))
             {
                 WeaponAimSystem = aim;

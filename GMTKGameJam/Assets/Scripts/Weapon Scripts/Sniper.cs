@@ -6,35 +6,35 @@ public class Sniper : Weapon
     private Bullet currentBullet;
     public override void StartFiring()
     {
-        if (durability == 0) return;
+        if (Durability == 0) return;
         print("Start");
         base.StartFiring();
     }
 
     private void TakeShot()
     {
-        currentBullet = Instantiate(bulletStats.BulletPrefab, muzzle.transform.position, transform.rotation);
-        currentBullet.SetBullet(this, bulletStats, owner);
+        currentBullet = Instantiate(BulletStats.BulletPrefab, Muzzle.transform.position, transform.rotation);
+        currentBullet.SetBullet(this, BulletStats, Owner);
         Decay();
     }
 
     public override void StopFiring()
     {
-        firing = false;
+        Firing = false;
         print("Stop");
     }
     private void Update()
     {
-        if(firing)
+        if(Firing)
         {
-            if(timeBetweenShots<=0)
+            if(TimeBetweenShots<=0)
             {
-                timeBetweenShots = stats.FireRate;
+                TimeBetweenShots = Stats.FireRate;
                 TakeShot();
             }
             else
             {
-                timeBetweenShots -= Time.deltaTime;
+                TimeBetweenShots -= Time.deltaTime;
             }
         }    
     }

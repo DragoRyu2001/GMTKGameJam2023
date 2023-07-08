@@ -14,7 +14,10 @@ namespace Entities
             inputAxis.x = Input.GetAxisRaw("Horizontal");
             inputAxis.y = Input.GetAxisRaw("Vertical");
             _movement.SetMovement(inputAxis);
-            
+            if (Input.GetKeyDown(KeyCode.LeftShift))
+            {
+                //_movement.Dash();
+            }
         }
         
         //Pass in Weapon Aim Vector2 and Weapon Shoot Input
@@ -37,15 +40,23 @@ namespace Entities
         {
             if (Input.GetKeyDown(KeyCode.F) && AvailableWeapons.Count>0)
             {
-                WeaponAimSystem.AddWeapon(AvailableWeapons[0]);
-                AvailableWeapons[0].OnPickup(Owner.PLAYER);
+                Weapon availableWeapon = AvailableWeapons[0];
+                SetWeaponStat(availableWeapon);
+                WeaponAimSystem.AddWeapon(availableWeapon);
             }
+        }
+
+        private static void SetWeaponStat(Weapon availableWeapon)
+        {
+            float multiplier = PlayerStats.Instance.GetDamageMultiplier(availableWeapon);
+            float durability = PlayerStats.Instance.GetDurability(availableWeapon);
+            availableWeapon.OnPickup(Owner.PLAYER, multiplier, durability);
         }
 
         public void SetData(Camera cam)
         {
-            base.SetData();
-            this._camera = cam;
+            _camera = cam;
+            Health = PlayerStats.Instance.GetPlayerHealth();
             if (TryGetComponent(out MovementScript movementScript))
             {
                 _movement = movementScript;
@@ -54,6 +65,7 @@ namespace Entities
             {
                 Debug.LogError("Movement Script Could not Be found");
             }
+            base.SetData();
         }
     }
 }

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace SODefinitions
 {
-    [CreateAssetMenu(fileName = "ProgressionSystem", menuName = "WeaponProgressionSO")]
+    [CreateAssetMenu(fileName = "ProgressionSystem", menuName = "ProgressionSO")]
     // ReSharper disable once InconsistentNaming
     public class ProgressionSO : ScriptableObject
     {

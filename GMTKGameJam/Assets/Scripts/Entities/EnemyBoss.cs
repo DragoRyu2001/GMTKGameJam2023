@@ -18,7 +18,12 @@ public class EnemyBoss : AdaptiveFighterClass
 
     protected override void PickUpWeapon()
     {
-        AvailableWeapons[0].OnPickup(Owner.BOSS);
+        AvailableWeapons[0].OnPickup(Owner.BOSS, 2, 0.5f);
         throw new System.NotImplementedException();
+    }
+
+    public void SetData()
+    {
+        base.SetData();
     }
 }

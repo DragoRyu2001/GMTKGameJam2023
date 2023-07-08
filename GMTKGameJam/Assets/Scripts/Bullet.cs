@@ -12,13 +12,13 @@ public class Bullet : MonoBehaviour
     private BulletSO _bulletSO;
     private Sprite _sprite;
     private bool _canMove;
-    private int _damage;
+    private float _damage;
     // ReSharper disable once InconsistentNaming
     public void SetBullet(Weapon weapon, BulletSO bulletSO, Owner owner)
     {
-        this._bulletSO = bulletSO;
+        _bulletSO = bulletSO;
         _sprite = GetBulletSprite(weapon.GetType());
-        _damage = (int)bulletSO.BaseDamage;
+        _damage = bulletSO.BaseDamage * weapon.DamageMultiplier;
         _canMove = true;
         SetLayer(owner);
         Destroy(gameObject, 5f);
@@ -26,24 +26,13 @@ public class Bullet : MonoBehaviour
 
     private void SetLayer(Owner owner)
     {
-        switch (owner)
+        gameObject.layer = owner switch
         {
-            case Owner.PLAYER:
-                {
-                    gameObject.layer = LayerMask.NameToLayer("PlayerBullet");
-                    break;
-                }
-            case Owner.ENEMY:
-                {
-                    gameObject.layer = LayerMask.NameToLayer("EnemyBullet");
-                    break;
-                }
-            case Owner.BOSS:
-                {
-                    gameObject.layer = LayerMask.NameToLayer("BossBullet");
-                    break;
-                }
-        }
+            Owner.PLAYER => LayerMask.NameToLayer("PlayerBullet"),
+            Owner.ENEMY => LayerMask.NameToLayer("EnemyBullet"),
+            Owner.BOSS => LayerMask.NameToLayer("BossBullet"),
+            _ => gameObject.layer
+        };
     }
 
     private void FixedUpdate()
