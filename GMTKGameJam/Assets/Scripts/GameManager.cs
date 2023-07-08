@@ -2,11 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using DragoRyu.Utilities;
+using Entities;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private GameObject PlayerPrefab;
+    [SerializeField] private Player PlayerPrefab;
     [SerializeField] private List<GameObject> EnemyPrefab;
     public Transform PlayerTransform { get; private set; }
     public Action PlayerDeath;
@@ -18,8 +19,9 @@ public class GameManager : MonoBehaviour
     }
     private void SpawnPlayer()
     {
-        PlayerTransform = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity).transform;
-        
+        var player = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);
+        player.SetData();
+        PlayerTransform = player.transform;
     }
 
     private IEnumerator SpawnLogic()

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Interfaces;
 using SODefinitions;
 using UnityEngine;
@@ -7,12 +8,13 @@ namespace Entities
 {
     public abstract class AdaptiveFighterClass : MonoBehaviour, IDamageable
     {
-        private float _health;
-
+        [SerializeField] protected CharacterSO CharacterSo;
+        
         protected WeaponAim WeaponAimSystem;
         protected MovementScript Movement;
-        protected CharacterSO CharacterSo;
-
+        protected List<Weapon> AvailableWeapons;
+        
+        private float _health;
         public void TakeDamage(float damage)
         {
             _health -= damage;
@@ -36,10 +38,9 @@ namespace Entities
             DamageLogic();
         }
 
-        public virtual void SetData(CharacterSO so)
+        public virtual void SetData()
         {
-            _health = so.BaseHealth;
-            CharacterSo = so;
+            _health = CharacterSo.BaseHealth;
             if (TryGetComponent(out MovementScript movementScript))
             {
                 Movement = movementScript;
@@ -59,6 +60,16 @@ namespace Entities
             }
         }
 
+        public void AddWeaponAvailable(Weapon weapon)
+        {
+            AvailableWeapons.Add(weapon);
+        }
+
+        public void RemoveWeaponAvailable(Weapon weapon)
+        {
+            AvailableWeapons.Remove(weapon);
+        }
+        
         protected abstract void MovementLogic();
         protected abstract void DamageLogic();
     }

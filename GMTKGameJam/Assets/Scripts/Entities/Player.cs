@@ -33,9 +33,9 @@ namespace Entities
             }
         }
 
-        public void SetData(Camera cam, CharacterSO so)
+        public void SetData(Camera cam)
         {
-            base.SetData(so);
+            base.SetData();
             this._camera = cam;
         }
     }
