@@ -112,7 +112,8 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        throw new System.NotImplementedException();
+        Debug.Log("Enemy Took Damage");
+        Kill();
     }
 
     public void TakeHeal(float health)

@@ -60,9 +60,9 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Triggered" + other.name);
-        if (TryGetComponent(out IDamageable target))
+        if (other.TryGetComponent(out IDamageable target))
         {
+            Debug.Log(other.name+" Shot");
             target.TakeDamage(_damage);
             Destroy(gameObject);
         }

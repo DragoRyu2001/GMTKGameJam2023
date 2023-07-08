@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8514214841013497074}
   - component: {fileID: 8668496185018657999}
   - component: {fileID: 2179829479682367352}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SMGEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   destination: {fileID: 0}
-  acceleration: 0
+  acceleration: 0.8
   velocity: 0
 --- !u!114 &8514214841013497074
 MonoBehaviour:
@@ -238,7 +238,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6967150724241155736}
   - component: {fileID: 8275232649649226903}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -321,7 +321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1566305482792824505}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Muzzle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

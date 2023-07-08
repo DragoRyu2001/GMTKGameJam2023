@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace DragoRyu.Utilities
 {
+    [System.Serializable]
     public struct NumberRange: IEquatable<NumberRange>, IFormattable
     {
         public float Min;

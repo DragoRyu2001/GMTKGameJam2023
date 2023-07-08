@@ -1,5 +1,7 @@
 using System;
-
+using System.Collections.Generic;
+using UnityEngine;
+using Random = UnityEngine.Random;
 namespace DragoRyu.Utilities
 {
     public static class FunctionalUtilities
@@ -14,6 +16,11 @@ namespace DragoRyu.Utilities
         {
             if (action == null || action.GetInvocationList().Length == 0) return;
             action(value);
+        }
+
+        public static T GetRandom<T>(this List<T> list)
+        {
+            return list[Random.Range(0, list.Count)];
         }
     }
 }
