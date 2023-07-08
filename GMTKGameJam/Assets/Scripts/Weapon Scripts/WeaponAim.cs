@@ -1,6 +1,5 @@
 using DragoRyu.Utilities;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class WeaponAim : MonoBehaviour
@@ -22,11 +21,11 @@ public class WeaponAim : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        if(weaponList.Count > 0)
+        if (weaponList.Count > 0)
         {
-            phaseDiff = Mathf.PI / weaponList.Count;
+            phaseDiff = 2f * Mathf.PI / weaponList.Count;
         }
-        print(phaseDiff);
+        print(phaseDiff * Mathf.Rad2Deg);
     }
 
     public void AimLogic(Vector2 aimPosition)
@@ -77,9 +76,9 @@ public class WeaponAim : MonoBehaviour
             weaponList.Add(weapon);
 
         }
-        weapon.onDecay += RemoveWeapon; 
-        phaseDiff = Mathf.PI / weaponList.Count;
-        
+        weapon.onDecay += RemoveWeapon;
+        phaseDiff = 2f * Mathf.PI / weaponList.Count;
+        print(phaseDiff * Mathf.Rad2Deg);
     }
 
     public void RemoveWeapon(Weapon weapon)
@@ -89,9 +88,9 @@ public class WeaponAim : MonoBehaviour
             weaponList.Remove(weapon);
             if (weaponList.Count > 0)
             {
-                phaseDiff = Mathf.PI / weaponList.Count;
+                phaseDiff = 2f * Mathf.PI / weaponList.Count;
             }
         }
-            Destroy(weapon.gameObject);
+        Destroy(weapon.gameObject);
     }
 }
