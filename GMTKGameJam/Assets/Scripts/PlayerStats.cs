@@ -8,10 +8,23 @@ using UnityEngine;
 /// </summary>
 public class PlayerStats : MonoBehaviour
 {
+    public static PlayerStats Instance;
     [SerializeField] private ProgressionSO PlayerProgression;
     [SerializeField] private ProgressionSO AssaultProgression;
     [SerializeField] private ProgressionSO DMRProgression;
     [SerializeField] private ProgressionSO SMGProgression;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
+    }
 
     public float GetPlayerHealth()
     {
@@ -21,19 +34,21 @@ public class PlayerStats : MonoBehaviour
 
     public float GetDamageMultiplier(Weapon weapon)
     {
-        var progression = GetWeaponProgression(weapon.GetType());
+        var progression = GetProgression(weapon.GetType());
         var level = PlayerPrefsManager.GetWeaponEntity(weapon.GetType()).GetDamageLevel();
         return progression.DamageProgression[level];
     }
 
     public float GetDurability(Weapon weapon)
     {
-        var progression = GetWeaponProgression(weapon.GetType());
+        var progression = GetProgression(weapon.GetType());
         var level = PlayerPrefsManager.GetWeaponEntity(weapon.GetType()).GetDurabilityLevel();
         return progression.DurabilityProgression[level];
     }
-    private ProgressionSO GetWeaponProgression(Type weaponType)
+    public ProgressionSO GetProgression(Type weaponType = null)
     {
+        if(weaponType==null)
+            return PlayerProgression;
         if (weaponType == typeof(Assault))
         {
             return AssaultProgression;
@@ -46,7 +61,7 @@ public class PlayerStats : MonoBehaviour
         {
             return SMGProgression;
         }
-        return PlayerProgression;
+        return null;
     }
 
 }
