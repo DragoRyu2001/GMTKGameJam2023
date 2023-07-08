@@ -15,4 +15,9 @@ public class EnemyBoss : AdaptiveFighterClass
     {
         throw new System.NotImplementedException();
     }
+
+    protected override void PickUpWeapon()
+    {
+        throw new System.NotImplementedException();
+    }
 }

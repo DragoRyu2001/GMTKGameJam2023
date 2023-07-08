@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Interfaces;
 using SODefinitions;
@@ -11,7 +10,6 @@ namespace Entities
         [SerializeField] protected CharacterSO CharacterSo;
         
         protected WeaponAim WeaponAimSystem;
-        protected MovementScript Movement;
         protected List<Weapon> AvailableWeapons;
         
         private float _health;
@@ -41,15 +39,6 @@ namespace Entities
         public virtual void SetData()
         {
             _health = CharacterSo.BaseHealth;
-            if (TryGetComponent(out MovementScript movementScript))
-            {
-                Movement = movementScript;
-            }
-            else
-            {
-                Debug.LogError("Movement Script Could not Be found");
-            }
-
             if (TryGetComponent(out WeaponAim aim))
             {
                 WeaponAimSystem = aim;
@@ -72,5 +61,7 @@ namespace Entities
         
         protected abstract void MovementLogic();
         protected abstract void DamageLogic();
+
+        protected abstract void PickUpWeapon();
     }
 }

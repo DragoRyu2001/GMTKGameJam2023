@@ -6,13 +6,15 @@ namespace Entities
     public class Player : AdaptiveFighterClass
     {
         private Camera _camera;
+
+        private MovementScript _movement;
         //input and Update position
         protected override void MovementLogic()
         {
             Vector2 inputAxis = Vector2.zero;
             inputAxis.x = Input.GetAxisRaw("Horizontal");
             inputAxis.y = Input.GetAxisRaw("Vertical");
-            Movement.SetMovement(inputAxis);
+            _movement.SetMovement(inputAxis);
             
         }
         
@@ -33,9 +35,23 @@ namespace Entities
             }
         }
 
+        protected override void PickUpWeapon()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public void SetData(Camera cam)
         {
             base.SetData();
+            if (TryGetComponent(out MovementScript movementScript))
+            {
+                _movement = movementScript;
+            }
+            else
+            {
+                Debug.LogError("Movement Script Could not Be found");
+            }
+
             this._camera = cam;
         }
     }
