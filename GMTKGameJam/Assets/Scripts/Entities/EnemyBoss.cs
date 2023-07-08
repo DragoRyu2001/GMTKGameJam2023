@@ -67,7 +67,8 @@ public class EnemyBoss : AdaptiveFighterClass
 
     private IEnumerator Scavenge()
     {
-       target = GameManager.instance.
+        yield return null;
+       //target = GameManager.instance.
     }
 
     protected override void MovementLogic()
