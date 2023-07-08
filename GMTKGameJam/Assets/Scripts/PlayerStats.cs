@@ -15,23 +15,21 @@ public class PlayerStats : MonoBehaviour
 
     public float GetPlayerHealth()
     {
-        //TODO:- @Sanchith Fetch Level from Level Storage
-        var level = 0;
+        var level = PlayerPrefsManager.Player.GetDurabilityLevel();
         return PlayerProgression.DurabilityProgression[level];
     }
 
     public float GetDamageMultiplier(Weapon weapon)
     {
         var progression = GetWeaponProgression(weapon.GetType());
-        //TODO:- @Sanchith Fetch Level from Level Storage
-        var level = 1;
+        var level = PlayerPrefsManager.GetWeaponEntity(weapon.GetType()).GetDamageLevel();
         return progression.DamageProgression[level];
     }
 
     public float GetDurability(Weapon weapon)
     {
         var progression = GetWeaponProgression(weapon.GetType());
-        var level = 2;
+        var level = PlayerPrefsManager.GetWeaponEntity(weapon.GetType()).GetDurabilityLevel();
         return progression.DurabilityProgression[level];
     }
     private ProgressionSO GetWeaponProgression(Type weaponType)
