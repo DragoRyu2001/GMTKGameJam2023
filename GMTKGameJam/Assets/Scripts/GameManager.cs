@@ -4,32 +4,42 @@ using System.Collections.Generic;
 using DragoRyu.Utilities;
 using Entities;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Player PlayerPrefab;
-    [SerializeField] private List<Enemy> EnemyPrefabs;
+    //[SerializeField] private List<Enemy> EnemyPrefabs;
     [SerializeField] private NumberRange SpawnRange;
     [Range(0.1f, 10)]
     [SerializeField] 
     private float InitialTime;
+
+    [SerializeField] private WeightedRandom<Enemy> EnemyPrefabs;
     public Transform PlayerTransform { get; private set; }
     public Action PlayerDeath;
-    
-    public static GameManager instance;
 
+    public float DropChance
+    {
+        get
+        {
+            var totalEnemies = _activeEnemies.Count;
+            return Mathf.Lerp(0.25f, 0.1f, (float)totalEnemies/20);
+        }
+    }
+    
+    public static GameManager Instance;
+    private static List<Enemy> _activeEnemies = new List<Enemy>();
     private void Awake()
     {
-        if (instance == null)
+        if (Instance == null)
         {
-            instance = this;
+            Instance = this;
         }
-        else if(instance !=this) 
+        else if(Instance !=this) 
         {
-            Destroy(instance);
-            instance = this;
+            Destroy(Instance);
+            Instance = this;
         }
         SpawnPlayer();
         StartCoroutine(SpawnLogic());
@@ -47,11 +57,16 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             yield return new WaitForSeconds(InitialTime);
-            if(InitialTime>=0.1f)
+            if (InitialTime >= 0.1f)
+            {
                 InitialTime -= 0.01f;
+            }
+            else
+            {
+                InitialTime = 0.5f;
+            }
             SpawnEnemy();
         }
-
     }
     private void SpawnEnemy()
     {
@@ -61,13 +76,14 @@ public class GameManager : MonoBehaviour
         Vector2 cartPosition;
         cartPosition.x = distance * Mathf.Cos(angle);
         cartPosition.y = distance * Mathf.Sin(angle);
-        var obj = EnemyPrefabs.GetRandom();
-        Instantiate(obj, cartPosition, Quaternion.identity);
+        var obj = EnemyPrefabs.GetWeightedRandom();
+        var enemy = Instantiate(obj, cartPosition, Quaternion.identity);
+        _activeEnemies.Add(enemy);
     }
 
-    public void EnemyDied()
+    public void EnemyDied(Enemy enemy)
     {
-        
+        _activeEnemies.Remove(enemy);
     }
     public void PlayerDied()
     {

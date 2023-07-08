@@ -168,14 +168,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerPrefab: {fileID: 2616403299397759372, guid: acd70e2b0dae6dc44b1602b632082aff, type: 3}
-  EnemyPrefabs:
-  - {fileID: 5023772473366059138, guid: 851a0adf29e9227459c2ce9af19eba13, type: 3}
-  - {fileID: 8514214841013497074, guid: f073330e0ee0883429fe92a1fbf02c2a, type: 3}
-  - {fileID: 8514214841013497074, guid: 65973c7a2ca82634299cbbe7ad344bef, type: 3}
   SpawnRange:
     Min: 15
     Max: 25
   InitialTime: 2.01
+  EnemyPrefabs:
+    list:
+    - {fileID: 8514214841013497074, guid: 65973c7a2ca82634299cbbe7ad344bef, type: 3}
+    - {fileID: 8514214841013497074, guid: f073330e0ee0883429fe92a1fbf02c2a, type: 3}
+    - {fileID: 5023772473366059138, guid: 851a0adf29e9227459c2ce9af19eba13, type: 3}
+    weights: 3c0000001e0000000a000000
 --- !u!1 &582994679
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,7 +1016,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: -1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.36862746, g: 0.8117647, b: 0.4948694, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

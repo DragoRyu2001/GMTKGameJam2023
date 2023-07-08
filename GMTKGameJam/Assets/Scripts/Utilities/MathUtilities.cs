@@ -1,4 +1,7 @@
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace DragoRyu.Utilities
 {
@@ -26,7 +29,22 @@ namespace DragoRyu.Utilities
             float newValue = (int)(value * multiplier);
             newValue /= multiplier;
             return newValue;
+        }
 
+        public static T GetWeightedRandom<T>(this List<T> list, int[] weights)
+        {
+            var weightSum = weights.Sum();
+            var value = Random.Range(0, weightSum);
+            var total = 0;
+            for (int i = 0; i < weights.Length; i++)
+            {
+                total += weights[i];
+                if (value < total)
+                {
+                    return list[i];
+                }
+            }
+            return default;
         }
     }
 }

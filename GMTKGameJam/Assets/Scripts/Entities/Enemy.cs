@@ -8,6 +8,7 @@ using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.TextCore.Text;
+using Random = UnityEngine.Random;
 
 public enum EnemyStates
 {
@@ -52,7 +53,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         health = stats.BaseHealth;
         Alive = true;
-        playerTransform = GameManager.instance.PlayerTransform;
+        playerTransform = GameManager.Instance.PlayerTransform;
         outsideRangeTrigger = new Trigger(() => { StartAttack(); });
         fireTrigger = new Trigger(weapon.StopFiring, weapon.StartFiring);
         movement.Init(stats.MoveSpeed, playerTransform);
@@ -108,7 +109,16 @@ public class Enemy : MonoBehaviour, IDamageable
     #region IDamageable stuff
     public void Kill()
     {
-        Alive = false;
+        GameManager.Instance.EnemyDied(this);
+        float dice = Random.Range(0, 1f);
+        if (dice < GameManager.Instance.DropChance)
+        {
+            Alive = false;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
     public void TakeDamage(float damage)
     {
