@@ -7,20 +7,20 @@ namespace Entities
 {
     public abstract class AdaptiveFighterClass : MonoBehaviour, IDamageable
     {
-        private int _health;
+        private float _health;
 
         protected WeaponAim WeaponAimSystem;
         protected MovementScript Movement;
         protected CharacterSO CharacterSo;
 
-        public void TakeDamage(int damage)
+        public void TakeDamage(float damage)
         {
             _health -= damage;
             if (_health <= 0)
                 Kill();
         }
 
-        public void TakeHeal(int health)
+        public void TakeHeal(float health)
         {
             _health += health;
         }
@@ -38,7 +38,7 @@ namespace Entities
 
         public virtual void SetData(CharacterSO so)
         {
-            _health = (int)so.BaseHealth;
+            _health = so.BaseHealth;
             CharacterSo = so;
             if (TryGetComponent(out MovementScript movementScript))
             {
