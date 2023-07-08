@@ -34,6 +34,7 @@ namespace Entities
         {
             MovementLogic();
             DamageLogic();
+            PickUpWeapon();
         }
 
         public virtual void SetData()
