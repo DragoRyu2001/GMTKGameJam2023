@@ -1,12 +1,14 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CharacterType", menuName = "CharacterSO")]
-public class CharacterSO : ScriptableObject
+namespace SODefinitions
 {
-    public float baseHealth;
-    public float moveSpeed;
-    public float charDamageMultiplier;  //1 on normal enemies
-
-    public float engagementDistance; //0 when player
-    public float exitDistance;       //0 when player
+    [CreateAssetMenu(fileName = "CharacterType", menuName = "CharacterSO")]
+    public class CharacterSo : ScriptableObject
+    {
+        public float BaseHealth;
+        public float MoveSpeed;
+        public float CharDamageMultiplier; //1 on normal enemies
+        public float EngagementDistance; //0 when player
+        public float ExitDistance; //0 when player
+    }
 }

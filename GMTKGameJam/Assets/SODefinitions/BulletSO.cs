@@ -1,10 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "BulletType", menuName = "BulletSO")]
-public class BulletSO : ScriptableObject
+namespace SODefinitions
 {
-    public float baseDamage;
-    public float baseSpeed;
+    [CreateAssetMenu(fileName = "BulletType", menuName = "BulletSO")]
+    public class BulletSo : ScriptableObject
+    {
+        public float BaseDamage;
+        public float BaseSpeed;
+        public List<Sprite> WeaponSpecific;
+    }
 }
