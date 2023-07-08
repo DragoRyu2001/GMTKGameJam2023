@@ -4,7 +4,8 @@ public class Assault : Weapon
 {
     public override void StartFiring()
     {
-        throw new System.NotImplementedException();
+        base.StartFiring();
+        if (durability == 0) return;
     }
 
     public override void StopFiring()
