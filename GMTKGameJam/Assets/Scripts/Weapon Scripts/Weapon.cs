@@ -7,15 +7,6 @@ using Unity.VisualScripting;
 using DragoRyu.Utilities;
 using UnityEngine;
 
-public enum WeaponAttribute
-{
-    NONE,
-    HOMING,
-    EXPLOSIVE,
-    BLEEDING,
-    TOXIC
-}
-
 public enum Owner
 {
     ENEMY,
@@ -52,7 +43,6 @@ public abstract class Weapon : MonoBehaviour
         {
             AdaptiveFighterClass fighter = collision.GetComponent<AdaptiveFighterClass>();
             fighter.AddWeaponAvailable(this);
-            Debug.Log("Added");
         }
     }
 
