@@ -8,15 +8,6 @@ using DragoRyu.Utilities;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public enum WeaponAttribute
-{
-    NONE,
-    HOMING,
-    EXPLOSIVE,
-    BLEEDING,
-    TOXIC
-}
-
 public enum Owner
 {
     ENEMY,

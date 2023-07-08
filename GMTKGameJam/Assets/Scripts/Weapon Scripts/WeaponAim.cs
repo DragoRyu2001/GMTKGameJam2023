@@ -12,6 +12,8 @@ public class WeaponAim : MonoBehaviour
     private Vector2 mousePosition;
     private float radAngle;
     private float phaseDiff;
+    public int WeaponCount { get => weaponList.Count;}
+
     // Start is called before the first frame update
     private void Awake()
     {
