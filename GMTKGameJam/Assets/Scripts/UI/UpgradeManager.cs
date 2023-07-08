@@ -45,7 +45,7 @@ namespace UI
 
         private void SetDMRSliders()
         {
-            ProgressionSO DMRStats = stats.GetProgression(typeof(DMR));
+            ProgressionSO DMRStats = stats.GetProgression(typeof(Sniper));
             SetSlider(DMRDamageProgression, DMRStats.DamageProgression.Count,
                 PlayerPrefsManager.DMR.GetDamageLevel());
             SetSlider(DMRDurabilityProgression, DMRStats.DurabilityProgression.Count,

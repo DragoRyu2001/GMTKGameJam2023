@@ -53,7 +53,7 @@ public class PlayerStats : MonoBehaviour
         {
             return AssaultProgression;
         }
-        if (weaponType == typeof(DMR))
+        if (weaponType == typeof(Sniper))
         {
             return DMRProgression;
         }

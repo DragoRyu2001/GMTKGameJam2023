@@ -1,6 +1,7 @@
 using UnityEngine;
+using DragoRyu.Utilities;
 
-public class Assault : Weapon
+public class Sniper : Weapon
 {
     private Bullet currentBullet;
     public override void StartFiring()
@@ -24,9 +25,9 @@ public class Assault : Weapon
     }
     private void Update()
     {
-        if (firing)
+        if(firing)
         {
-            if (timeBetweenShots <= 0)
+            if(timeBetweenShots<=0)
             {
                 timeBetweenShots = stats.FireRate;
                 TakeShot();
@@ -35,7 +36,7 @@ public class Assault : Weapon
             {
                 timeBetweenShots -= Time.deltaTime;
             }
-        }
+        }    
     }
 
 }

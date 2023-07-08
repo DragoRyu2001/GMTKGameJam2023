@@ -12,7 +12,7 @@ public static class PlayerPrefsManager
 
     public static EntityLevel GetWeaponEntity(Type weapon)
     {
-        if (weapon == typeof(DMR))
+        if (weapon == typeof(Sniper))
         {
             return DMR;
         }

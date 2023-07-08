@@ -29,24 +29,20 @@ public abstract class Weapon : MonoBehaviour
     public WeaponSO stats;
     public BulletSO bulletStats;
     public CircleCollider2D pickBox;
-    protected Owner owner; 
-    public int durability;
-    private bool startDecay;
     public Action<Weapon> onDecay;
+    protected Owner owner;
+
+    public float timeBetweenShots;
+    public int durability;
+    protected bool startDecay;
     public bool pickable;
+    protected bool firing;
 
     public virtual void StartFiring()
     {
-        if(startDecay)
-        {
-            durability--;
-            if(durability <= 0 )
-            {
-                onDecay.SafeInvoke(this);
-                Destroy(gameObject);
-            }
-        }
+        firing = true;
     }
+
     public abstract void StopFiring();
 
 
@@ -57,6 +53,20 @@ public abstract class Weapon : MonoBehaviour
             AdaptiveFighterClass fighter = collision.GetComponent<AdaptiveFighterClass>();
             fighter.AddWeaponAvailable(this);
             Debug.Log("Added");
+        }
+    }
+
+    protected void Decay()
+    {
+        if (startDecay)
+        {
+            durability--;
+            if (durability <= 0)
+            {
+                onDecay.SafeInvoke(this);
+                Destroy(gameObject);
+                return;
+            }
         }
     }
 
