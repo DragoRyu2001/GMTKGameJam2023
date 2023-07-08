@@ -9,7 +9,11 @@ namespace Entities
         //input and Update position
         public override void MovementLogic()
         {
-            throw new System.NotImplementedException();
+            Vector2 inputAxis = Vector2.zero;
+            inputAxis.x = Input.GetAxisRaw("Horizontal");
+            inputAxis.y = Input.GetAxisRaw("Vertical");
+            Movement.SetMovement(inputAxis);
+            
         }
         
         //Pass in Weapon Aim Vector2 and Weapon Shoot Input

@@ -16,12 +16,9 @@ public class MovementScript : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rb.isKinematic = true;
     }
-
-    // Update is called once per frame
-    void Update()
+    public void SetMovement(Vector2 inputMovement)
     {
-        movement.x = Input.GetAxis("Horizontal");
-        movement.y = Input.GetAxis("Vertical");
+        movement = inputMovement;
         movement.Normalize();
     }
 

@@ -10,6 +10,7 @@ namespace Entities
         private int _health;
         
         protected WeaponAim WeaponAimSystem;
+        protected MovementScript Movement;
         protected CharacterSO CharacterSo;
         
         public void TakeDamage(int damage)
