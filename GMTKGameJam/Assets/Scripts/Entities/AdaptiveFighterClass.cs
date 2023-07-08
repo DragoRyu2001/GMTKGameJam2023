@@ -59,7 +59,7 @@ namespace Entities
             }
         }
 
-        public abstract void MovementLogic();
-        public abstract void DamageLogic();
+        protected abstract void MovementLogic();
+        protected abstract void DamageLogic();
     }
 }

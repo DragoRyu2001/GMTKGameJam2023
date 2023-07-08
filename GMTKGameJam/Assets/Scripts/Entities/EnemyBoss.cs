@@ -6,12 +6,12 @@ using UnityEngine;
 public class EnemyBoss : AdaptiveFighterClass
 {
     //
-    public override void MovementLogic()
+    protected override void MovementLogic()
     {
         throw new System.NotImplementedException();
     }
     //
-    public override void DamageLogic()
+    protected override void DamageLogic()
     {
         throw new System.NotImplementedException();
     }

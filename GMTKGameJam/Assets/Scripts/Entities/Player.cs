@@ -7,7 +7,7 @@ namespace Entities
     {
         private Camera _camera;
         //input and Update position
-        public override void MovementLogic()
+        protected override void MovementLogic()
         {
             Vector2 inputAxis = Vector2.zero;
             inputAxis.x = Input.GetAxisRaw("Horizontal");
@@ -17,7 +17,7 @@ namespace Entities
         }
         
         //Pass in Weapon Aim Vector2 and Weapon Shoot Input
-        public override void DamageLogic()
+        protected override void DamageLogic()
         {
             Vector2 mouseToWorldSpacePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
             //WeaponAimSystem.
