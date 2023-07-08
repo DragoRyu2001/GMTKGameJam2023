@@ -1,12 +1,10 @@
 using DragoRyu.Utilities;
-using SODefinitions;
-using System;
 using System.Collections.Generic;
-using UnityEditor;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public class WeaponAim : MonoBehaviour
-{ 
+{
     [SerializeField] private List<Weapon> weaponList;
     [SerializeField] private float orbitRadius;
     [SerializeField] private float lerpRate;
@@ -49,14 +47,14 @@ public class WeaponAim : MonoBehaviour
 
     public void StartFiring()
     {
-        foreach(Weapon w in weaponList)
+        foreach (Weapon w in weaponList)
         {
             w.StartFiring();
         }
     }
     public void StopFiring()
     {
-        foreach(Weapon w in weaponList)
+        foreach (Weapon w in weaponList)
         {
             w.StopFiring();
         }
@@ -64,33 +62,49 @@ public class WeaponAim : MonoBehaviour
 
     public void AddWeapon(Weapon weapon)
     {
-        if(weaponList.Count<4)
+        if (weaponList.Count < 4)
         {
             weaponList.Add(weapon);
         }
         else
         {
-            weaponList.RemoveAt(weaponList.Count-1);
+            weaponList.RemoveAt(weaponList.Count - 1);
             weaponList.Add(weapon);
+
         }
-        phaseDiff = Mathf.PI / weaponList.Count; 
+        phaseDiff = Mathf.PI / weaponList.Count;
     }
 
-    public void RemoveWeapon(Weapon weapon)
+    public bool RemoveWeapon(Weapon weapon)
     {
         if (weaponList.Count > 0)
         {
-            weaponList.Remove(weapon);
+            bool success = weaponList.Remove(weapon);
             phaseDiff = Mathf.PI / weaponList.Count;
+            return success;
         }
+        return false;
     }
 
-    public void RemoveWeapon()
+    public bool RemoveWeapon(int index)
+    {
+        if (weaponList.Count > 0 && index < weaponList.Count-1)
+        {
+            weaponList.RemoveAt(index);
+            phaseDiff = Mathf.PI / weaponList.Count;
+            return true;
+        }
+        return false;
+    }
+
+    public bool RemoveWeapon()
     {
         if (weaponList.Count > 0)
         {
-            weaponList.RemoveAt(weaponList.Count-1);
+            weaponList.RemoveAt(weaponList.Count - 1);
             phaseDiff = Mathf.PI / weaponList.Count;
+            return true;
         }
+        return false;
     }
 }
