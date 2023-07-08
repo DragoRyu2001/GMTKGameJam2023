@@ -1,6 +1,8 @@
 using DragoRyu.DevTools;
+using DragoRyu.Utilities;
 using Interfaces;
 using SODefinitions;
+using System;
 using System.Net.NetworkInformation;
 using UnityEngine;
 using UnityEngine.AI;
@@ -16,8 +18,8 @@ public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] private EnemyStates enemyState;
     [SerializeField] private Weapon weapon;
+    [SerializeField] private EnemyMovement movement;
     [SerializeField] private CharacterSO stats;
-    [SerializeField] private NavMeshAgent agent;
     [SerializeField] private Collider2D hitbox;
     [SerializeField] private Collider2D pickBox;
 
@@ -27,9 +29,12 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private bool alive;
 
     private Trigger outsideRangeTrigger;
+    private Trigger fireTrigger;
+
     public Transform playerTransform;
 
     public bool pickable;
+    private bool firing;
     public bool Alive { get => alive; 
         set
         {
@@ -40,13 +45,14 @@ public class Enemy : MonoBehaviour, IDamageable
             }
         }
     }
-
     // Start is called before the first frame update
     void Start()
     {
         health = stats.BaseHealth;
         Alive = true;
         outsideRangeTrigger = new Trigger(() => { StartAttack(); });
+        fireTrigger = new Trigger(weapon.StopFiring, weapon.StartFiring);
+        movement.Init(stats.MoveSpeed, playerTransform);
     }
 
     // Update is called once per frame
@@ -61,7 +67,7 @@ public class Enemy : MonoBehaviour, IDamageable
     private void TrackDistance()
     {
         if (playerTransform == null) return;
-        distanceToPlayer = (transform.position - playerTransform.position).sqrMagnitude;
+        distanceToPlayer = (transform.position - playerTransform.position).magnitude;
         if (distanceToPlayer > stats.ExitDistance)
         {
             outsideRangeTrigger.ResetTrigger();
@@ -81,15 +87,15 @@ public class Enemy : MonoBehaviour, IDamageable
     private void GiveChase()
     {
         enemyState = EnemyStates.CHASE;
-        agent.destination = playerTransform.position;
-        weapon.StopFiring();
+        movement.StartMove();
+        fireTrigger.SetTrigger();
     }
 
     private void StartAttack()
     {
         enemyState |= EnemyStates.ATTACK;
-        agent.ResetPath();
-        weapon.StartFiring();
+        movement.EndMove();
+        fireTrigger.ResetTrigger();
     }
 
     #region IDamageable stuff
@@ -107,5 +113,13 @@ public class Enemy : MonoBehaviour, IDamageable
         throw new System.NotImplementedException();
     }
     #endregion
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, stats.ExitDistance);
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, stats.EngagementDistance);
+    }
 
 }
