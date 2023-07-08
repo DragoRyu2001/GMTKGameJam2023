@@ -3,7 +3,8 @@ using UnityEngine;
 namespace SODefinitions
 {
     [CreateAssetMenu(fileName = "CharacterType", menuName = "CharacterSO")]
-    public class CharacterSo : ScriptableObject
+    // ReSharper disable once InconsistentNaming
+    public class CharacterSO : ScriptableObject
     {
         public float BaseHealth;
         public float MoveSpeed;
