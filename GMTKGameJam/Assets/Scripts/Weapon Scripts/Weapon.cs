@@ -16,6 +16,5 @@ public abstract class Weapon : MonoBehaviour
     public WeaponSO stats;
 
     public abstract void StartFiring();
-
     public abstract void StopFiring();
 }
