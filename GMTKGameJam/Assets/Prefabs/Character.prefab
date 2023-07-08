@@ -143,8 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponList: []
-  orbitRadius: 2
-  lerpRate: 0.2
+  orbitRadius: 2.65
+  lerpRate: 0.125
 --- !u!114 &2616403299397759372
 MonoBehaviour:
   m_ObjectHideFlags: 0

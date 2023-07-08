@@ -42,7 +42,7 @@ public class WeaponAim : MonoBehaviour
                 lerpRate);
 
             Vector2 weaponDir = aimPosition - weapon.transform.position.XY();
-            float perWeaponAngle = Mathf.Atan2(weaponDir.y, direction.x) * Mathf.Rad2Deg - 90f;
+            float perWeaponAngle = Mathf.Atan2(weaponDir.y, weaponDir.x) * Mathf.Rad2Deg - 90f;
             weapon.transform.rotation = Quaternion.Euler(0, 0, perWeaponAngle);
         }
     }
