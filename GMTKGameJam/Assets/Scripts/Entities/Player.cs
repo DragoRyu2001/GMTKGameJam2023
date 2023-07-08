@@ -21,7 +21,6 @@ namespace Entities
         protected override void DamageLogic()
         {
             Vector2 mouseToWorldSpacePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-            //WeaponAimSystem.
             WeaponAimSystem.AimLogic(mouseToWorldSpacePosition);
             if (Input.GetMouseButtonDown(0))
             {
@@ -45,6 +44,7 @@ namespace Entities
 
         public void SetData(Camera cam)
         {
+            base.SetData();
             this._camera = cam;
             if (TryGetComponent(out MovementScript movementScript))
             {
@@ -54,7 +54,6 @@ namespace Entities
             {
                 Debug.LogError("Movement Script Could not Be found");
             }
-            base.SetData();
         }
     }
 }

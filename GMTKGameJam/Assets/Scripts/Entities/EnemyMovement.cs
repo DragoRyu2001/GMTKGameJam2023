@@ -42,6 +42,12 @@ public class EnemyMovement : MonoBehaviour
         StartCoroutine(Decelerate());
     }
 
+    public void KillMovement()
+    {
+        StopAllCoroutines();
+        Destroy(this);
+    }
+
     private void Update()
     {
         Vector2 direction = destination.position.XY() - transform.position.XY();

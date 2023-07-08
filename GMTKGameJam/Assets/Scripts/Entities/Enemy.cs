@@ -1,5 +1,6 @@
 using DragoRyu.DevTools;
 using DragoRyu.Utilities;
+using Entities;
 using Interfaces;
 using SODefinitions;
 using System;
@@ -22,6 +23,8 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private CharacterSO stats;
     [SerializeField] private Collider2D hitbox;
     [SerializeField] private Collider2D pickBox;
+    [SerializeField] private LayerMask pickLayer;
+    [SerializeField] private LayerMask playerLayer;
 
     [SerializeField] private float health;
     [SerializeField] private float distanceToPlayer;
@@ -34,7 +37,6 @@ public class Enemy : MonoBehaviour, IDamageable
     public Transform playerTransform;
 
     public bool pickable;
-    private bool firing;
     public bool Alive { get => alive; 
         set
         {
@@ -42,6 +44,11 @@ public class Enemy : MonoBehaviour, IDamageable
             if(!alive)
             {
                 pickable = true;
+                pickBox.enabled = true;
+                hitbox.enabled = false;
+                gameObject.layer = LayerMask.NameToLayer("Pickable");
+                movement.KillMovement();
+                
             }
         }
     }
@@ -50,6 +57,7 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         health = stats.BaseHealth;
         Alive = true;
+        playerTransform = GameManager.instance.PlayerTransform;
         outsideRangeTrigger = new Trigger(() => { StartAttack(); });
         fireTrigger = new Trigger(weapon.StopFiring, weapon.StartFiring);
         movement.Init(stats.MoveSpeed, playerTransform);
@@ -61,6 +69,10 @@ public class Enemy : MonoBehaviour, IDamageable
         if (Alive)
         {
             TrackDistance();   
+        }
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            Kill();
         }
     }
 
@@ -120,6 +132,26 @@ public class Enemy : MonoBehaviour, IDamageable
         Gizmos.DrawWireSphere(transform.position, stats.ExitDistance);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, stats.EngagementDistance);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.layer == LayerMask.NameToLayer("Player")||collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            AdaptiveFighterClass fighter = collision.GetComponent<AdaptiveFighterClass>();
+            fighter.AddWeaponAvailable(weapon);
+            Debug.Log("Added");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
+        {
+            Debug.Log("Removed");
+            AdaptiveFighterClass fighter = collision.GetComponent<AdaptiveFighterClass>();
+            fighter.RemoveWeaponAvailable(weapon);
+        }
     }
 
 }

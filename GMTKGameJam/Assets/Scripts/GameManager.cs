@@ -11,7 +11,22 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<GameObject> EnemyPrefab;
     public Transform PlayerTransform { get; private set; }
     public Action PlayerDeath;
-    
+
+    public static GameManager instance;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if(instance !=this) 
+        {
+            Destroy(instance);
+            instance = this;
+        }
+    }
+
     // Start is called before the first frame update
     private void Start()
     {
