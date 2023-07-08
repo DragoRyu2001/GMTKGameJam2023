@@ -8,21 +8,23 @@ namespace Entities
     public abstract class AdaptiveFighterClass : MonoBehaviour, IDamageable
     {
         private int _health;
-        
+
         protected WeaponAim WeaponAimSystem;
         protected MovementScript Movement;
         protected CharacterSO CharacterSo;
-        
+
         public void TakeDamage(int damage)
         {
             _health -= damage;
-            if(_health<=0)
+            if (_health <= 0)
                 Kill();
         }
+
         public void TakeHeal(int health)
         {
             _health += health;
         }
+
         public void Kill()
         {
             Destroy(gameObject);
@@ -33,11 +35,20 @@ namespace Entities
             MovementLogic();
             DamageLogic();
         }
-        
+
         public virtual void SetData(CharacterSO so)
         {
             _health = (int)so.BaseHealth;
             CharacterSo = so;
+            if (TryGetComponent(out MovementScript movementScript))
+            {
+                Movement = movementScript;
+            }
+            else
+            {
+                Debug.LogError("Movement Script Could not Be found");
+            }
+
             if (TryGetComponent(out WeaponAim aim))
             {
                 WeaponAimSystem = aim;
@@ -47,6 +58,7 @@ namespace Entities
                 Debug.LogError("Does not have reference to Weapon Aim");
             }
         }
+
         public abstract void MovementLogic();
         public abstract void DamageLogic();
     }
