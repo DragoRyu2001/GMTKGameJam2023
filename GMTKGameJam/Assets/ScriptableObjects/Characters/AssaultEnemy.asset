@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1c37ad17e33b6824ab795719071d2a4d, type: 3}
-  m_Name: DMREnemy
+  m_Name: AssaultEnemy
   m_EditorClassIdentifier: 
-  BaseHealth: 50
-  MoveSpeed: 6
-  CharDamageMultiplier: 1.5
+  BaseHealth: 75
+  MoveSpeed: 5
+  CharDamageMultiplier: 1
   EngagementDistance: 5
-  ExitDistance: 7.5
+  ExitDistance: 6

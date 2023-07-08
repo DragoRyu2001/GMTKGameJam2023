@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour, IDamageable
             alive = value;
             if(!alive)
             {
+                weapon.StopFiring();
                 weapon.pickable = true;
                 pickBox.enabled = true;
                 hitbox.enabled = false;

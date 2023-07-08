@@ -73,7 +73,7 @@ public class WeaponAim : MonoBehaviour
         }
         else
         {
-            weaponList.RemoveAt(weaponList.Count - 1);
+            RemoveWeapon(weaponList[^1]);
             weaponList.Add(weapon);
 
         }
@@ -92,33 +92,6 @@ public class WeaponAim : MonoBehaviour
                 phaseDiff = Mathf.PI / weaponList.Count;
             }
         }
-    }
-
-    public bool RemoveWeapon(int index)
-    {
-        if (weaponList.Count > 0 && index < weaponList.Count-1)
-        {
-            weaponList.RemoveAt(index);
-            if (weaponList.Count > 0)
-            {
-                phaseDiff = Mathf.PI / weaponList.Count;
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public bool RemoveWeapon()
-    {
-        if (weaponList.Count > 0)
-        {
-            weaponList.RemoveAt(weaponList.Count - 1);
-            if (weaponList.Count > 0)
-            {
-                phaseDiff = Mathf.PI / weaponList.Count;
-            }
-            return true;
-        }
-        return false;
+            Destroy(weapon.gameObject);
     }
 }
