@@ -22,7 +22,10 @@ public class WeaponAim : MonoBehaviour
     void Start()
     {
         cam = Camera.main;
-        phaseDiff = Mathf.PI / weaponList.Count;
+        if(weaponList.Count > 0)
+        {
+            phaseDiff = Mathf.PI / weaponList.Count;
+        }
         print(phaseDiff);
     }
 
@@ -72,18 +75,21 @@ public class WeaponAim : MonoBehaviour
             weaponList.Add(weapon);
 
         }
+        weapon.onDecay += RemoveWeapon; 
         phaseDiff = Mathf.PI / weaponList.Count;
+        
     }
 
-    public bool RemoveWeapon(Weapon weapon)
+    public void RemoveWeapon(Weapon weapon)
     {
         if (weaponList.Count > 0)
         {
-            bool success = weaponList.Remove(weapon);
-            phaseDiff = Mathf.PI / weaponList.Count;
-            return success;
+            weaponList.Remove(weapon);
+            if (weaponList.Count > 0)
+            {
+                phaseDiff = Mathf.PI / weaponList.Count;
+            }
         }
-        return false;
     }
 
     public bool RemoveWeapon(int index)
@@ -91,7 +97,10 @@ public class WeaponAim : MonoBehaviour
         if (weaponList.Count > 0 && index < weaponList.Count-1)
         {
             weaponList.RemoveAt(index);
-            phaseDiff = Mathf.PI / weaponList.Count;
+            if (weaponList.Count > 0)
+            {
+                phaseDiff = Mathf.PI / weaponList.Count;
+            }
             return true;
         }
         return false;
@@ -102,7 +111,10 @@ public class WeaponAim : MonoBehaviour
         if (weaponList.Count > 0)
         {
             weaponList.RemoveAt(weaponList.Count - 1);
-            phaseDiff = Mathf.PI / weaponList.Count;
+            if (weaponList.Count > 0)
+            {
+                phaseDiff = Mathf.PI / weaponList.Count;
+            }
             return true;
         }
         return false;

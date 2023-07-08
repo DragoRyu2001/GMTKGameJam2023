@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Interfaces;
 using SODefinitions;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -13,19 +14,43 @@ public class Bullet : MonoBehaviour
     private bool _canMove;
     private int _damage;
     // ReSharper disable once InconsistentNaming
-    public void SetBullet(Weapon weapon, BulletSO bulletSO)
+    public void SetBullet(Weapon weapon, BulletSO bulletSO, Owner owner)
     {
         this._bulletSO = bulletSO;
         _sprite = GetBulletSprite(weapon.GetType());
         _damage = (int)bulletSO.BaseDamage;
         _canMove = true;
+        SetLayer(owner);
+        Destroy(gameObject, 5f);
     }
-    
+
+    private void SetLayer(Owner owner)
+    {
+        switch (owner)
+        {
+            case Owner.PLAYER:
+                {
+                    gameObject.layer = LayerMask.NameToLayer("PlayerBullet");
+                    break;
+                }
+            case Owner.ENEMY:
+                {
+                    gameObject.layer = LayerMask.NameToLayer("EnemyBullet");
+                    break;
+                }
+            case Owner.BOSS:
+                {
+                    gameObject.layer = LayerMask.NameToLayer("BossBullet");
+                    break;
+                }
+        }
+    }
+
     private void FixedUpdate()
     {
         if (!_canMove) return;
         Transform trans = transform;
-        trans.position += trans.forward * (_bulletSO.BaseSpeed * Time.fixedDeltaTime);
+        trans.position += trans.up * (_bulletSO.BaseSpeed * Time.fixedDeltaTime);
     }
     
     private Sprite GetBulletSprite(System.Type weaponType)
@@ -33,11 +58,13 @@ public class Bullet : MonoBehaviour
         return _bulletSO.WeaponSpecific[0];
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
+        Debug.Log("Triggered" + other.name);
         if (TryGetComponent(out IDamageable target))
         {
             target.TakeDamage(_damage);
+            Destroy(gameObject);
         }
     }
 }

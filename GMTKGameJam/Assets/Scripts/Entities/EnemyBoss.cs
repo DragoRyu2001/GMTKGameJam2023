@@ -18,7 +18,7 @@ public class EnemyBoss : AdaptiveFighterClass
 
     protected override void PickUpWeapon()
     {
-        AvailableWeapons[0].startDecay = true;
+        AvailableWeapons[0].OnPickup(Owner.BOSS);
         throw new System.NotImplementedException();
     }
 }

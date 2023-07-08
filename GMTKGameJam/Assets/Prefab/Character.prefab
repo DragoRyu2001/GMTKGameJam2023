@@ -142,8 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d40fee3d62f1a44b8004230b70267e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponList:
-  - {fileID: 3757386619353488643, guid: 851a0adf29e9227459c2ce9af19eba13, type: 3}
+  weaponList: []
   orbitRadius: 2
   lerpRate: 0.2
 --- !u!114 &2616403299397759372

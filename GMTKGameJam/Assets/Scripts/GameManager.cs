@@ -25,12 +25,12 @@ public class GameManager : MonoBehaviour
             Destroy(instance);
             instance = this;
         }
+        SpawnPlayer();
     }
 
     // Start is called before the first frame update
     private void Start()
     {
-        SpawnPlayer();
     }
     private void SpawnPlayer()
     {

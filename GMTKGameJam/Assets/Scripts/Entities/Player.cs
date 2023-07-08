@@ -38,8 +38,7 @@ namespace Entities
             if (Input.GetKeyDown(KeyCode.F) && AvailableWeapons.Count>0)
             {
                 WeaponAimSystem.AddWeapon(AvailableWeapons[0]);
-                AvailableWeapons[0].startDecay = true;
-                AvailableWeapons.RemoveAt(0);
+                AvailableWeapons[0].OnPickup(Owner.PLAYER);
             }
         }
 

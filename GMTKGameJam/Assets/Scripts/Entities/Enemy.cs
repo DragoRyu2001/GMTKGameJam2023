@@ -14,7 +14,6 @@ public enum EnemyStates
     CHASE,
     ATTACK
 }
-
 public class Enemy : MonoBehaviour, IDamageable
 {
     [SerializeField] private EnemyStates enemyState;
@@ -23,32 +22,27 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private CharacterSO stats;
     [SerializeField] private Collider2D hitbox;
     [SerializeField] private Collider2D pickBox;
-    [SerializeField] private LayerMask pickLayer;
-    [SerializeField] private LayerMask playerLayer;
 
     [SerializeField] private float health;
     [SerializeField] private float distanceToPlayer;
-    [SerializeField] private float rotSpeed;
     [SerializeField] private bool alive;
 
     private Trigger outsideRangeTrigger;
     private Trigger fireTrigger;
 
     public Transform playerTransform;
-
-    public bool pickable;
     public bool Alive { get => alive; 
         set
         {
             alive = value;
             if(!alive)
             {
-                pickable = true;
+                weapon.pickable = true;
                 pickBox.enabled = true;
                 hitbox.enabled = false;
                 gameObject.layer = LayerMask.NameToLayer("Pickable");
                 movement.KillMovement();
-                
+                Destroy(this);
             }
         }
     }
@@ -125,33 +119,4 @@ public class Enemy : MonoBehaviour, IDamageable
         throw new System.NotImplementedException();
     }
     #endregion
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, stats.ExitDistance);
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, stats.EngagementDistance);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.layer == LayerMask.NameToLayer("Player")||collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            AdaptiveFighterClass fighter = collision.GetComponent<AdaptiveFighterClass>();
-            fighter.AddWeaponAvailable(weapon);
-            Debug.Log("Added");
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Enemy"))
-        {
-            Debug.Log("Removed");
-            AdaptiveFighterClass fighter = collision.GetComponent<AdaptiveFighterClass>();
-            fighter.RemoveWeaponAvailable(weapon);
-        }
-    }
-
 }
