@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 namespace DragoRyu.Utilities
 {
@@ -20,7 +21,7 @@ namespace DragoRyu.Utilities
         }
         public float GetLength()
         {
-            return Max - Min;
+            return Mathf.Abs(Max - Min);
         }
 
         public string ToString(string format, IFormatProvider formatProvider)

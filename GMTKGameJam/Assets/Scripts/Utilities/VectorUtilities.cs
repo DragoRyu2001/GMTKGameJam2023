@@ -35,6 +35,35 @@ namespace DragoRyu.Utilities
         {
             return new Vector2(value.y, value.z);
         }
+        public static Vector3 XYZ(this Vector3 value)
+        {
+            return new Vector3(value.x, value.y, value.z);
+        }
+
+        public static Vector3 XZY(this Vector3 value)
+        {
+            return new Vector3(value.x, value.z, value.y);
+        }
+
+        public static Vector3 YXZ(this Vector3 value)
+        {
+            return new Vector3(value.y, value.x, value.z);
+        }
+
+        public static Vector3 YZX(this Vector3 value)
+        {
+            return new Vector3(value.y, value.z, value.x);
+        }
+
+        public static Vector3 ZXY(this Vector3 value)
+        {
+            return new Vector3(value.z, value.x, value.y);
+        }
+
+        public static Vector3 ZYX(this Vector3 value)
+        {
+            return new Vector3(value.z, value.y, value.x);
+        }
         #endregion
 
         public static SphericalVector ToSpherical(this Vector3 value)
@@ -58,5 +87,6 @@ namespace DragoRyu.Utilities
             value.Scale(clampVector);
             return value.magnitude;
         }
+        
     }
 }
