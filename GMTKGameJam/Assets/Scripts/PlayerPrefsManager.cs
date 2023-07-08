@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using UnityEngine;
 // ReSharper disable UnusedMember.Local
 // ReSharper disable InconsistentNaming
@@ -24,6 +23,23 @@ public static class PlayerPrefsManager
 
         return Assault;
     }
+
+    private const string Coins = "Coins";
+
+    public static int GetCoins()
+    {
+        return PlayerPrefs.HasKey(Coins) ? PlayerPrefs.GetInt(Coins) : 0;
+    }
+
+    public static void IncreaseCoins(int amount)
+    {
+        PlayerPrefs.SetInt(Coins, GetCoins() + amount);
+    }
+    public static void DecreaseCoins(int amount)
+    {
+        PlayerPrefs.SetInt(Coins, GetCoins()-amount);
+    }
+
 }
 
 public class EntityLevel
