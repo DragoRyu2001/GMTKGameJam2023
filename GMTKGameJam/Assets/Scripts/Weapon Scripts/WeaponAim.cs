@@ -15,21 +15,10 @@ public class WeaponAim : MonoBehaviour
     private Vector2 mousePosition;
     private float radAngle;
     private float phaseDiff;
-
-    public static WeaponAim instance;
     // Start is called before the first frame update
     private void Awake()
     {
-        //weaponList.Capacity = 4;
-        if (instance != this)
-        {
-            Destroy(instance);
-            instance = this;
-        }
-        else
-        {
-            instance = this;
-        }
+        weaponList.Capacity = 4;
     }
 
     void Start()
