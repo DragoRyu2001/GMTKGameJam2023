@@ -10,9 +10,10 @@ namespace Entities
         [SerializeField] protected CharacterSO CharacterSo;
         
         protected WeaponAim WeaponAimSystem;
-        protected List<Weapon> AvailableWeapons;
+        protected List<Weapon> AvailableWeapons = new();
         
         private float _health;
+        private bool _canUpdate;
         public void TakeDamage(float damage)
         {
             _health -= damage;
@@ -32,6 +33,7 @@ namespace Entities
 
         private void Update()
         {
+            if (!_canUpdate) return;
             MovementLogic();
             DamageLogic();
             PickUpWeapon();
@@ -48,6 +50,8 @@ namespace Entities
             {
                 Debug.LogError("Does not have reference to Weapon Aim");
             }
+
+            _canUpdate = true;
         }
 
         public void AddWeaponAvailable(Weapon weapon)

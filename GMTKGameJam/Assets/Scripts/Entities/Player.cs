@@ -1,4 +1,3 @@
-using SODefinitions;
 using UnityEngine;
 
 namespace Entities
@@ -37,12 +36,16 @@ namespace Entities
 
         protected override void PickUpWeapon()
         {
-            throw new System.NotImplementedException();
+            if (Input.GetKeyDown(KeyCode.F) && AvailableWeapons.Count>0)
+            {
+                WeaponAimSystem.AddWeapon(AvailableWeapons[0]);
+                AvailableWeapons.RemoveAt(0);
+            }
         }
 
         public void SetData(Camera cam)
         {
-            base.SetData();
+            this._camera = cam;
             if (TryGetComponent(out MovementScript movementScript))
             {
                 _movement = movementScript;
@@ -51,8 +54,7 @@ namespace Entities
             {
                 Debug.LogError("Movement Script Could not Be found");
             }
-
-            this._camera = cam;
+            base.SetData();
         }
     }
 }

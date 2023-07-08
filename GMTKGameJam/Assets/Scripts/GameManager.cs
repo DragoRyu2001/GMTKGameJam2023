@@ -19,8 +19,8 @@ public class GameManager : MonoBehaviour
     }
     private void SpawnPlayer()
     {
-        var player = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);
-        player.SetData();
+        Player player = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);
+        player.SetData(Camera.main);
         PlayerTransform = player.transform;
     }
 
