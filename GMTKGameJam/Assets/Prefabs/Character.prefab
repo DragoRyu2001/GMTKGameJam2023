@@ -128,8 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09443de903ad03b49b97eb8bd65e5c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dashImpulse: 15
+  dashDecay: 0.2
   tolerance: 0.25
   stats: {fileID: 11400000, guid: e681dad3848188a488517faa8a8cb203, type: 2}
+  moveSpeed: 0
 --- !u!114 &3617278122931746083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +162,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterSo: {fileID: 11400000, guid: e681dad3848188a488517faa8a8cb203, type: 2}
+  dashCooldown: 2
+  nullRadius: 10
+  currentDashCooldown: 0
 --- !u!61 &-7938306220048566335
 BoxCollider2D:
   m_ObjectHideFlags: 0

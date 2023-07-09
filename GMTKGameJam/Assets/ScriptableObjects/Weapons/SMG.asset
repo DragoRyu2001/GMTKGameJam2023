@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676da759d04d8ef419ca72bb004ebd70, type: 3}
   m_Name: SMG
   m_EditorClassIdentifier: 
-  FireRate: 0.05
+  FireRate: 0.1
   BulletSpeedMultiplier: 0.1
   WeaponDamage: 3.4

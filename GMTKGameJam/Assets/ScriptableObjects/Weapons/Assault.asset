@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 676da759d04d8ef419ca72bb004ebd70, type: 3}
   m_Name: Assault
   m_EditorClassIdentifier: 
-  FireRate: 0.2
+  FireRate: 0.15
   BulletSpeedMultiplier: 0.5
   WeaponDamage: 5

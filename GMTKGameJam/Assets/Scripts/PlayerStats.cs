@@ -51,6 +51,12 @@ public class PlayerStats : MonoBehaviour
         var level = PlayerPrefsManager.GetWeaponEntity(weapon.GetType()).GetDurabilityLevel();
         return progression.DurabilityProgression[level];
     }
+
+    public float GetDashResetTime()
+    {
+        return 1.5f;
+    }
+
     public ProgressionSO GetProgression(Type weaponType = null)
     {
         if(weaponType==null)

@@ -1,12 +1,24 @@
+using Interfaces;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Entities
 {
     public class Player : AdaptiveFighterClass
     {
-        private Camera _camera;
+        [Header("Dash Variables")]
+        [SerializeField] private float dashCooldown;
+        [SerializeField] private float nullRadius;
+        [SerializeField] private float currentDashCooldown;
 
+        private Camera _camera;
         private MovementScript _movement;
+
+
+        private Bullet currentBullet;
+        private IDamageable currentDamageable;
         //input and Update position
         protected override void MovementLogic()
         {
@@ -14,12 +26,49 @@ namespace Entities
             inputAxis.x = Input.GetAxisRaw("Horizontal");
             inputAxis.y = Input.GetAxisRaw("Vertical");
             _movement.SetMovement(inputAxis);
-            if (Input.GetKeyDown(KeyCode.LeftShift))
+
+            if (Input.GetKeyDown(KeyCode.LeftShift)||Input.GetMouseButtonDown(1))
             {
-                //_movement.Dash();
+                if (currentDashCooldown > 0) return;
+
+                Debug.Log("Dashing");
+
+                currentDashCooldown = dashCooldown; 
+                _movement.Dash();
+                Nullify();
+                StartCoroutine(StartCooldown());
             }
         }
-        
+
+        private void Nullify()
+        {
+            Collider2D[] collArray = Physics2D.OverlapCircleAll(transform.position, nullRadius);
+            
+            if(collArray == null || collArray.Length == 0) return;
+
+            foreach(Collider2D coll in collArray)
+            {
+                if(coll.TryGetComponent(out currentBullet))
+                {
+                    Destroy(currentBullet.gameObject);
+                }
+                else if(coll.TryGetComponent(out currentDamageable))
+                {
+                    currentDamageable.TakeDamage(10);
+                }
+            }
+            
+        }
+
+        private IEnumerator StartCooldown()
+        {
+            while(currentDashCooldown>0)
+            {
+                yield return null;
+                currentDashCooldown -= Time.deltaTime;
+            }
+        }
+
         //Pass in Weapon Aim Vector2 and Weapon Shoot Input
         protected override void DamageLogic()
         {
