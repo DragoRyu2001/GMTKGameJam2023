@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Weapon FirstWeaponPickup;
     [SerializeField] private CinemachineVirtualCamera VirtualCamera;
     [FormerlySerializedAs("pickableWeapons")] [SerializeField] private List<Weapon> pickableWeapons;
-    [SerializeField] private GameCanvasManager _canvasManager;
     [Range(0.1f, 10)]
     [SerializeField]
     private float InitialTime;
