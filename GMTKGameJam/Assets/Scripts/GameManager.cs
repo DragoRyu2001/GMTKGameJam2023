@@ -23,7 +23,7 @@ public class GameManager : MonoBehaviour
         get
         {
             var totalEnemies = _activeEnemies.Count;
-            return Mathf.Lerp(0.25f, 0.1f, (float)totalEnemies/10);
+            return Mathf.Lerp(0.5f, 0.1f, (float)totalEnemies/10);
         }
     }
     
@@ -67,8 +67,15 @@ public class GameManager : MonoBehaviour
             SpawnEnemy();
         }
     }
+
+    private IEnumerator SpawnBoss()
+    {
+        yield return new WaitForSeconds(2*60f);
+        //SpawnBoss()
+    }
     private void SpawnEnemy()
     {
+        if (PlayerTransform == null) return;
         var origin = PlayerTransform.position;
         float angle = Random.Range(0, 360f) * Mathf.Deg2Rad;
         float distance = Random.Range(SpawnRange.Min, SpawnRange.Max);
@@ -79,7 +86,6 @@ public class GameManager : MonoBehaviour
         var enemy = Instantiate(obj, cartPosition, Quaternion.identity);
         _activeEnemies.Add(enemy);
     }
-
     public void EnemyDied(Enemy enemy)
     {
         _activeEnemies.Remove(enemy);

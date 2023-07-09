@@ -8,6 +8,5 @@ namespace SODefinitions
         public float FireRate; 
         public float BulletSpeedMultiplier;
         public float WeaponDamageMultiplier;
-        public WeaponAttribute WeaponAttribute; 
     }
 }
