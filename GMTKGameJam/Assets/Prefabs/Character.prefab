@@ -148,7 +148,7 @@ MonoBehaviour:
   WeaponCapacity: 4
   weaponList: []
   orbitRadius: 2.65
-  lerpRate: 0.125
+  lerpRate: 0.04
 --- !u!114 &2616403299397759372
 MonoBehaviour:
   m_ObjectHideFlags: 0
