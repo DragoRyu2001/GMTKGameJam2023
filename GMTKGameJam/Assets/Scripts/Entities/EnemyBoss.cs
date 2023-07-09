@@ -123,6 +123,7 @@ public class EnemyBoss : AdaptiveFighterClass
             {
                 trackDistance = false;
                 SetState();
+                inAction = false;
                 yield break;
             }
 
@@ -146,32 +147,22 @@ public class EnemyBoss : AdaptiveFighterClass
 
     private IEnumerator Scavenge()
     {
+        trackDistance = true;
         if(GameManager._pickableWeapons.Count!=0)
         {
             Debug.Log("Called again");
-            int limit = Mathf.Min(WeaponAimSystem.WeaponCapacity - WeaponAimSystem.WeaponCount, GameManager._pickableWeapons.Count - 1);
-            Debug.Log("Limit"+limit+GameManager._pickableWeapons.Count);
-            Weapon w = GameManager._pickableWeapons[0];
+            Weapon w = GameManager._pickableWeapons[^1];
             WeaponAimSystem.AddWeapon(w);
             w.OnPickup(Owner.BOSS, CharacterSo.CharDamageMultiplier, PlayerStats.Instance.GetBaseDurability(w));
-            GameManager._pickableWeapons.Remove(w);
 
             SetState();
             inAction = false;
             yield break;
         }
 
-        Collider2D enemyColl = Physics2D.OverlapCircle(transform.position, 20f, LayerMask.NameToLayer("Enemy"));
-        if(enemyColl == null)
-        {
-            target = GameManager._activeEnemies[UnityEngine.Random.Range(0, GameManager._activeEnemies.Count - 1)].transform;
-            Debug.Log("Picking Random");
-        }
-        else
-        {
-            target = enemyColl.transform;
-            Debug.Log("Got Enemy");
-        }
+        target = GameManager._activeEnemies[UnityEngine.Random.Range(0, GameManager._activeEnemies.Count - 1)].transform;
+        Debug.Log("Picking Random");   
+
         targetEnemy = target.GetComponent<Enemy>();
         trackDistance = true;
         yield return StartCoroutine(TimeoutOrEnemyDeath(targetEnemy));

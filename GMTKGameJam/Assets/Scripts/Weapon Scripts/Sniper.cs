@@ -7,7 +7,6 @@ public class Sniper : Weapon
     public override void StartFiring()
     {
         if (Durability == 0) return;
-        print("Start");
         base.StartFiring();
     }
 
@@ -21,7 +20,6 @@ public class Sniper : Weapon
     public override void StopFiring()
     {
         Firing = false;
-        print("Stop");
     }
     private void Update()
     {

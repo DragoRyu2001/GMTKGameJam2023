@@ -54,12 +54,7 @@ public class GameManager : MonoBehaviour
 
         player.SetData(Camera.main);
         PlayerTransform = player.transform;
-        SpawnBoss();
-    }
-
-    private void SpawnBoss()
-    {
-        EnemyBoss boss = Instantiate(EnemyBossPrefab, Vector3.zero, Quaternion.identity);
+        StartCoroutine(SpawnBoss());
     }
 
     private void Update()
@@ -87,8 +82,8 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator SpawnBoss()
     {
-        yield return new WaitForSeconds(2*60f);
-        //SpawnBoss()
+        yield return null;
+        EnemyBoss boss = Instantiate(EnemyBossPrefab, Vector3.zero, Quaternion.identity);
     }
     private void SpawnEnemy()
     {

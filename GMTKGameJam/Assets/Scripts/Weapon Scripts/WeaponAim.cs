@@ -77,7 +77,6 @@ public class WeaponAim : MonoBehaviour
             weaponList.Add(weapon);
 
         }
-        GameManager._pickableWeapons.Remove(weapon);
         weapon.OnDecay += RemoveWeapon;
         phaseDiff = 2f * Mathf.PI / weaponList.Count;
         print(phaseDiff * Mathf.Rad2Deg);

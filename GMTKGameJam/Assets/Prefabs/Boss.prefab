@@ -152,8 +152,8 @@ MonoBehaviour:
   - 50
   - 20
   - 0
-  ScavengeTime: 15
-  TotalHuntTime: 60
+  ScavengeTime: 5
+  TotalHuntTime: 10
 --- !u!114 &4794952180631432003
 MonoBehaviour:
   m_ObjectHideFlags: 0

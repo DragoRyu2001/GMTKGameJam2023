@@ -45,7 +45,6 @@ public class EnemyMovement : MonoBehaviour
 
     public void EndMove()
     {
-        Debug.Log("Ending move");
         StartCoroutine(Decelerate());
     }
 

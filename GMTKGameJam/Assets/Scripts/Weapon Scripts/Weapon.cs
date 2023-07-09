@@ -68,7 +68,6 @@ public abstract class Weapon : MonoBehaviour
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
         {
-            Debug.Log("Removed");
             AdaptiveFighterClass fighter = collision.GetComponent<AdaptiveFighterClass>();
             fighter.RemoveWeaponAvailable(this);
         }
