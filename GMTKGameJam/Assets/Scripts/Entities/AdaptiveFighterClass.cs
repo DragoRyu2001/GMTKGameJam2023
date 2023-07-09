@@ -18,6 +18,7 @@ namespace Entities
         private bool _canUpdate;
         private float _totalHealth;
         public Action<float> TookDamage;
+        public Action<bool> WeaponAvailable;
         public void TakeDamage(float damage)
         {
             Health -= damage;
@@ -33,6 +34,7 @@ namespace Entities
 
         public void Kill()
         {
+            GameManager.Instance.PlayerDied(this.GetType());
             Destroy(gameObject);
         }
 
@@ -63,11 +65,14 @@ namespace Entities
         public void AddWeaponAvailable(Weapon weapon)
         {
             AvailableWeapons.Add(weapon);
+            WeaponAvailable.SafeInvoke(true);
         }
 
         public void RemoveWeaponAvailable(Weapon weapon)
         {
             AvailableWeapons.Remove(weapon);
+            if(AvailableWeapons.Count==0)
+                WeaponAvailable.SafeInvoke(false);
         }
         
         protected abstract void MovementLogic();
