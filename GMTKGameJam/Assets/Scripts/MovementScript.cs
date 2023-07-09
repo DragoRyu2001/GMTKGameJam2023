@@ -2,12 +2,14 @@ using SODefinitions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class MovementScript : MonoBehaviour
 {
-    [Header("Dash Variables")]
-    [SerializeField] private float dashImpulse;
+    [Header("Dash Variables")] [SerializeField]
+    private float dashImpulse;
+
     [SerializeField] private float dashDecay;
 
 
@@ -15,8 +17,8 @@ public class MovementScript : MonoBehaviour
     [SerializeField] private CharacterSO stats;
     private Vector2 movement;
     private Rigidbody2D rb;
-    [SerializeField]private float moveSpeed;
-    
+    [SerializeField] private float moveSpeed;
+
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class MovementScript : MonoBehaviour
         rb.isKinematic = true;
         moveSpeed = stats.MoveSpeed;
     }
+
     public void SetMovement(Vector2 inputMovement)
     {
         movement = inputMovement;
@@ -33,7 +36,10 @@ public class MovementScript : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * (moveSpeed * Time.fixedDeltaTime));
+        Vector2 updatedPosition = rb.position + movement * (moveSpeed * Time.fixedDeltaTime);
+        updatedPosition.x = Mathf.Clamp(updatedPosition.x, -26.87f, 26.87f);
+        updatedPosition.y = Mathf.Clamp(updatedPosition.y, -15.961f, 18.252f);
+        rb.MovePosition(updatedPosition);
 
         if (movement.sqrMagnitude > tolerance)
         {
@@ -51,7 +57,7 @@ public class MovementScript : MonoBehaviour
 
     private IEnumerator MoveSpeedDecay()
     {
-        while(Mathf.Abs(moveSpeed - stats.MoveSpeed) > tolerance)
+        while (Mathf.Abs(moveSpeed - stats.MoveSpeed) > tolerance)
         {
             moveSpeed -= dashDecay;
             yield return null;

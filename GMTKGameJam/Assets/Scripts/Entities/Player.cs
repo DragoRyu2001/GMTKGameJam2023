@@ -3,22 +3,24 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Entities
 {
     public class Player : AdaptiveFighterClass
     {
+        [FormerlySerializedAs("dashCooldown")]
         [Header("Dash Variables")]
-        [SerializeField] private float dashCooldown;
-        [SerializeField] private float nullRadius;
-        [SerializeField] private float currentDashCooldown;
+        [SerializeField] private float DashCooldown;
+        [SerializeField] private float NullRadius;
+        [SerializeField] private float CurrentDashCooldown;
 
         private Camera _camera;
         private MovementScript _movement;
 
 
-        private Bullet currentBullet;
-        private IDamageable currentDamageable;
+        private Bullet _currentBullet;
+        private IDamageable _currentDamageable;
         //input and Update position
         protected override void MovementLogic()
         {
@@ -29,11 +31,11 @@ namespace Entities
 
             if (Input.GetKeyDown(KeyCode.LeftShift)||Input.GetMouseButtonDown(1))
             {
-                if (currentDashCooldown > 0) return;
+                if (CurrentDashCooldown > 0) return;
 
                 Debug.Log("Dashing");
 
-                currentDashCooldown = dashCooldown; 
+                CurrentDashCooldown = DashCooldown; 
                 _movement.Dash();
                 Nullify();
                 StartCoroutine(StartCooldown());
@@ -42,19 +44,19 @@ namespace Entities
 
         private void Nullify()
         {
-            Collider2D[] collArray = Physics2D.OverlapCircleAll(transform.position, nullRadius);
+            Collider2D[] collArray = Physics2D.OverlapCircleAll(transform.position, NullRadius);
             
             if(collArray == null || collArray.Length == 0) return;
 
             foreach(Collider2D coll in collArray)
             {
-                if(coll.TryGetComponent(out currentBullet))
+                if(coll.TryGetComponent(out _currentBullet))
                 {
-                    Destroy(currentBullet.gameObject);
+                    Destroy(_currentBullet.gameObject);
                 }
-                else if(coll.TryGetComponent(out currentDamageable))
+                else if(coll.TryGetComponent(out _currentDamageable))
                 {
-                    currentDamageable.TakeDamage(10);
+                    _currentDamageable.TakeDamage(10);
                 }
             }
             
@@ -62,10 +64,10 @@ namespace Entities
 
         private IEnumerator StartCooldown()
         {
-            while(currentDashCooldown>0)
+            while(CurrentDashCooldown>0)
             {
                 yield return null;
-                currentDashCooldown -= Time.deltaTime;
+                CurrentDashCooldown -= Time.deltaTime;
             }
         }
 

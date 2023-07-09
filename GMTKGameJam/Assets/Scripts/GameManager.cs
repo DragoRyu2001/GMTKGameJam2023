@@ -3,6 +3,7 @@ using Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -14,12 +15,14 @@ public class GameManager : MonoBehaviour
     [SerializeField] private WeightedRandom<Enemy> EnemyPrefabs;
     [SerializeField] private NumberRange SpawnRange;
     [SerializeField] private Weapon FirstWeaponPickup;
+    [SerializeField] private CinemachineVirtualCamera VirtualCamera;
     [FormerlySerializedAs("pickableWeapons")] [SerializeField] private List<Weapon> pickableWeapons;
     [Range(0.1f, 10)]
     [SerializeField]
     private float InitialTime;
 
     public Transform PlayerTransform { get; private set; }
+    public Transform BossTransform { get; private set; }
     public Action PlayerDeath;
     public Action GameStart;
     public Action BossPhase;
@@ -65,9 +68,10 @@ public class GameManager : MonoBehaviour
 
     private void SpawnPlayer()
     {
-        Player player = Instantiate(PlayerPrefab, Vector3.up * 10f + Vector3.right *10f, Quaternion.identity); ;
+        Player player = Instantiate(PlayerPrefab, Vector2.zero, Quaternion.identity); ;
         player.SetData(Camera.main);
         PlayerTransform = player.transform;
+        VirtualCamera.Follow = PlayerTransform;
     }
     private IEnumerator SpawnLogic()
     {

@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
+  m_Color: {r: 0, g: 0.439, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09443de903ad03b49b97eb8bd65e5c4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashImpulse: 15
+  dashImpulse: 20
   dashDecay: 0.2
   tolerance: 0.25
   stats: {fileID: 11400000, guid: e681dad3848188a488517faa8a8cb203, type: 2}
@@ -163,9 +163,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterSo: {fileID: 11400000, guid: e681dad3848188a488517faa8a8cb203, type: 2}
-  dashCooldown: 2
-  nullRadius: 10
-  currentDashCooldown: 0
+  DashCooldown: 2
+  NullRadius: 0
+  CurrentDashCooldown: 0
 --- !u!61 &-7938306220048566335
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -237,7 +237,7 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   m_ShapePathHash: 0
   m_Mesh: {fileID: 0}
-  m_InstanceId: -1108844
+  m_InstanceId: 36234
   m_LocalBounds:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 0.5, z: 0}

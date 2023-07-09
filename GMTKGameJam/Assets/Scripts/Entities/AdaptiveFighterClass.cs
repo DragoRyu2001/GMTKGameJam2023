@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using DragoRyu.Utilities;
 using Interfaces;
 using SODefinitions;
 using UnityEngine;
@@ -14,9 +16,12 @@ namespace Entities
         
         protected float Health = 0;
         private bool _canUpdate;
+        private float _totalHealth;
+        public Action<float> TookDamage;
         public void TakeDamage(float damage)
         {
             Health -= damage;
+            TookDamage.SafeInvoke(Health/_totalHealth);
             if (Health <= 0)
                 Kill();
         }
@@ -42,6 +47,7 @@ namespace Entities
         protected virtual void SetData()
         {
             Health += CharacterSo.BaseHealth;
+            _totalHealth = Health;
             if (TryGetComponent(out WeaponAim aim))
             {
                 WeaponAimSystem = aim;
