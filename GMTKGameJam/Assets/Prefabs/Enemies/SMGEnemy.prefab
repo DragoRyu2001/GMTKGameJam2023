@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8668496185018657999}
   - component: {fileID: 2179829479682367352}
   - component: {fileID: 7655460290257192758}
+  - component: {fileID: -8196008846328805772}
   m_Layer: 7
   m_Name: SMGEnemy
   m_TagString: Untagged
@@ -32,8 +33,8 @@ Transform:
   m_GameObject: {fileID: 4963547742232792418}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.7035233, y: -1.0478588, z: 0}
-  m_LocalScale: {x: 0.75, y: 0.5, z: 0.75}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6967150724241155736}
   - {fileID: 1566305482792824505}
@@ -81,8 +82,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0, g: 1, b: 0.5226717, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 2526a4d92c4e0914390e14fa54f7142a, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -104,13 +105,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2989f3dbad67064a876b9d214414444, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 1566305482792824505}
-  stats: {fileID: 11400000, guid: 3b0b844ba325f7345b8a7604097fbda2, type: 2}
-  bulletStats: {fileID: 11400000, guid: 37474bba3bc2b7940bd3a9bf7ec8b86f, type: 2}
-  pickBox: {fileID: 2179829479682367352}
-  timeBetweenShots: 0
-  durability: 100
-  pickable: 0
+  FireRateMultiplier: 1
+  Muzzle: {fileID: 1566305482792824505}
+  Stats: {fileID: 11400000, guid: 3b0b844ba325f7345b8a7604097fbda2, type: 2}
+  BulletStats: {fileID: 11400000, guid: 37474bba3bc2b7940bd3a9bf7ec8b86f, type: 2}
+  PickBox: {fileID: 2179829479682367352}
+  TimeBetweenShots: 0
+  Durability: 100
+  Pickable: 0
   degreeVariance: 20
 --- !u!114 &-3941982595787832936
 MonoBehaviour:
@@ -181,18 +183,18 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.38}
+  m_Offset: {x: 0, y: -0.7255255}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.42}
+  m_Size: {x: 3.7463903, y: 2.9173386}
   m_EdgeRadius: 0
 --- !u!58 &2179829479682367352
 CircleCollider2D:
@@ -228,7 +230,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.21133333}
   serializedVersion: 2
-  m_Radius: 5
+  m_Radius: 10
 --- !u!50 &7655460290257192758
 Rigidbody2D:
   serializedVersion: 4
@@ -256,6 +258,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8196008846328805772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963547742232792418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e30e6aa55bda0043916812d03de6801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fill: {fileID: 0}
 --- !u!1 &5484581763294511008
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,8 +296,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5484581763294511008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.49, z: 0}
-  m_LocalScale: {x: 1, y: 1.5, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2125379245926866931}
@@ -308,7 +323,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: -876546973899608171, guid: 4ab1660feab6e384199fd1532569695b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -329,8 +344,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0.98931545, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: 01fba1d11d590a1498d1770aceae60bb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

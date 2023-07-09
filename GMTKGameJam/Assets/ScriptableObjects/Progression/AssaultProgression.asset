@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eadd45958d962443946cafa6b06d5f1, type: 3}
   m_Name: AssaultProgression
   m_EditorClassIdentifier: 
-  DamageProgression:
+  FireRateProgression:
   - 1
+  - 1.15
+  - 1.2
   - 1.25
   - 1.5
-  - 1.75
-  - 2
   DamageCost: 0a00000019000000280000003c0000004b000000
   DurabilityProgression:
   - 20

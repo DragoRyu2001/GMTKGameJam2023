@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private Trigger outsideRangeTrigger;
     private Trigger fireTrigger;
+    private HealthMatManager healthMatManager;
 
     public Transform playerTransform;
     public bool Alive { get => alive; 
@@ -46,6 +47,7 @@ public class Enemy : MonoBehaviour, IDamageable
     // Start is called before the first frame update
     void Start()
     {
+        healthMatManager = GetComponent<HealthMatManager>(); 
         health = stats.BaseHealth;
         Alive = true;
         playerTransform = GameManager.Instance.PlayerTransform;
@@ -113,7 +115,12 @@ public class Enemy : MonoBehaviour, IDamageable
     }
     public void TakeDamage(float damage)
     {
-        Kill();
+        health -= damage;
+        healthMatManager.UpdateHealthShader(health / stats.BaseHealth);
+        if(health<=0)
+        {
+            Kill();
+        }
     }
 
     public void TakeHeal(float health)

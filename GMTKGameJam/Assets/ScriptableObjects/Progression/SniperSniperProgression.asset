@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eadd45958d962443946cafa6b06d5f1, type: 3}
   m_Name: SniperSniperProgression
   m_EditorClassIdentifier: 
-  DamageProgression:
-  - 1
-  - 1.25
+  FireRateProgression:
+  - 1.1
+  - 1.4
   - 1.5
   - 1.75
   - 2

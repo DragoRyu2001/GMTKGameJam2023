@@ -38,11 +38,11 @@ public class PlayerStats : MonoBehaviour
         return PlayerProgression.DurabilityProgression[level];
     }
 
-    public float GetDamageMultiplier(Weapon weapon)
+    public float GetFireRateMultiplier(Weapon weapon)
     {
         var progression = GetProgression(weapon.GetType());
-        var level = PlayerPrefsManager.GetWeaponEntity(weapon.GetType()).GetDamageLevel();
-        return progression.DamageProgression[level];
+        var level = PlayerPrefsManager.GetWeaponEntity(weapon.GetType()).GetFireRateLevel();
+        return progression.FireRateProgression[level];
     }
 
     public float GetDurability(Weapon weapon)
@@ -51,6 +51,12 @@ public class PlayerStats : MonoBehaviour
         var level = PlayerPrefsManager.GetWeaponEntity(weapon.GetType()).GetDurabilityLevel();
         return progression.DurabilityProgression[level];
     }
+
+    public float GetDashResetTime()
+    {
+        return 1.5f;
+    }
+
     public ProgressionSO GetProgression(Type weaponType = null)
     {
         if(weaponType==null)

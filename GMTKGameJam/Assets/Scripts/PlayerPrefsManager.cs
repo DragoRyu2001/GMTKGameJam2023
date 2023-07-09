@@ -69,18 +69,18 @@ public class EntityLevel
         PlayerPrefs.SetInt(durability, GetDurabilityLevel()-1);
     }
 
-    public int GetDamageLevel()
+    public int GetFireRateLevel()
     {
         return PlayerPrefs.HasKey(damage) ? PlayerPrefs.GetInt(damage):0;
     }
 
     public void UpgradeDamage()
     {
-        PlayerPrefs.SetInt(damage, GetDamageLevel()+1);
+        PlayerPrefs.SetInt(damage, GetFireRateLevel()+1);
     }
 
     public void DowngradeDamage()
     {
-        PlayerPrefs.SetInt(damage, GetDamageLevel()-1);
+        PlayerPrefs.SetInt(damage, GetFireRateLevel()-1);
     }
 }

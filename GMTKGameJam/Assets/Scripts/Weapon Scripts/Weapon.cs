@@ -17,7 +17,7 @@ public enum Owner
 
 public abstract class Weapon : MonoBehaviour
 {
-    public float DamageMultiplier = 1f;
+    public float FireRateMultiplier = 1f;
     
     public Action<Weapon> OnDecay;
     public Action OnPickupEvent;
@@ -34,6 +34,9 @@ public abstract class Weapon : MonoBehaviour
     protected bool Firing;
     
     private bool _startDecay;
+    private HealthMatManager healthManager;
+    private bool lerpComplete;
+    private float baseDurability;
     
     public virtual void StartFiring()
     {
@@ -57,6 +60,8 @@ public abstract class Weapon : MonoBehaviour
         if (!_startDecay) return;
 
         Durability --;
+        if (lerpComplete)
+            healthManager.UpdateHealthShader(Durability / baseDurability);
         
         if (Durability > 0) return;
         
@@ -73,16 +78,29 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    public void OnPickup(Owner pickedUpBy, float damageMultiplier, float Durability)
+    public void OnPickup(Owner pickedUpBy, float fireRateMultiplier, float Durability)
     {
+        StartCoroutine(RefillHealth());
         _startDecay = true;
         Owner = pickedUpBy;
         Pickable = false;
         PickBox.enabled = false;
-        DamageMultiplier = damageMultiplier;
-        this.Durability = (int)Durability;
+        FireRateMultiplier = fireRateMultiplier;
+        baseDurability = this.Durability = (int)Durability;
         GameManager.PickableWeapons.Remove(this);
         OnPickupEvent.SafeInvoke();
     }
 
+    private IEnumerator RefillHealth()
+    {
+        healthManager = GetComponent<HealthMatManager>();
+        float elapsedTime = 0f;
+        while (elapsedTime < (Durability / baseDurability))
+        {
+            yield return null;
+            elapsedTime+=Time.deltaTime/2f;
+            healthManager.UpdateHealthShader(elapsedTime);
+        }
+        lerpComplete = true;
+    }
 }

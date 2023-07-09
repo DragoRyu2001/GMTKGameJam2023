@@ -30,7 +30,7 @@ public class SMG : Weapon
         {
             if (TimeBetweenShots <= 0)
             {
-                TimeBetweenShots = Stats.FireRate;
+                TimeBetweenShots = Stats.FireRate/FireRateMultiplier;
                 TakeShot();
             }
             else
