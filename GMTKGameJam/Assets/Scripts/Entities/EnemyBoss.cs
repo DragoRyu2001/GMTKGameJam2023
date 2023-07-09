@@ -160,6 +160,11 @@ public class EnemyBoss : AdaptiveFighterClass
             yield break;
         }
 
+        if(GameManager.ActiveEnemies.Count==0)
+        {
+            yield return new WaitUntil(()=>GameManager.ActiveEnemies.Count > 0);
+        }
+
         target = GameManager.ActiveEnemies[UnityEngine.Random.Range(0, GameManager.ActiveEnemies.Count - 1)].transform;
         Debug.Log("Picking Random");   
 
@@ -174,10 +179,15 @@ public class EnemyBoss : AdaptiveFighterClass
     private IEnumerator TimeoutOrEnemyDeath(Enemy enemy)
     {
         float elapsedTime =  0;
-        while(elapsedTime<=ScavengeTime)
+        while (elapsedTime <= ScavengeTime)
         {
-            if(!enemy.Alive)
+            if (!enemy.Alive)
             {
+                yield break;
+            }
+            if (enemy == null)
+            {
+                target = null;
                 yield break;
             }
             yield return null;
@@ -195,9 +205,7 @@ public class EnemyBoss : AdaptiveFighterClass
     protected override void DamageLogic()
     {
         if(target == null) return;
-        
         WeaponAimSystem.AimLogic(target.position);
-
     }
 
     protected override void PickUpWeapon()
