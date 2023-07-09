@@ -16,6 +16,11 @@ public class EnemyMovement : MonoBehaviour
         destination = dest;
     }
 
+    public void UpdateTarget(Transform dest)
+    {
+        destination = dest;
+    }
+
     public void StartMove()
     {
         StartCoroutine(Accelerate());
@@ -40,6 +45,7 @@ public class EnemyMovement : MonoBehaviour
 
     public void EndMove()
     {
+        Debug.Log("Ending move");
         StartCoroutine(Decelerate());
     }
 

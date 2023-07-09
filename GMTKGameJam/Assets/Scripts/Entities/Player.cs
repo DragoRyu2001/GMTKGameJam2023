@@ -50,7 +50,7 @@ namespace Entities
         {
             float multiplier = PlayerStats.Instance.GetDamageMultiplier(availableWeapon);
             float durability = PlayerStats.Instance.GetDurability(availableWeapon);
-            availableWeapon.OnPickup(Owner.PLAYER, multiplier, durability);
+            availableWeapon.OnPickup(Owner.PLAYER, multiplier, PlayerStats.Instance.GetDurability(availableWeapon));
         }
 
         public void SetData(Camera cam)

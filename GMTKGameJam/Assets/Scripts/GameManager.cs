@@ -1,18 +1,20 @@
+using DragoRyu.Utilities;
+using Entities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using DragoRyu.Utilities;
-using Entities;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private Player PlayerPrefab;
+    [SerializeField] private EnemyBoss EnemyBossPrefab;
     [SerializeField] private WeightedRandom<Enemy> EnemyPrefabs;
     [SerializeField] private NumberRange SpawnRange;
+    [SerializeField] private List<Weapon> pickableWeapons;
     [Range(0.1f, 10)]
-    [SerializeField] 
+    [SerializeField]
     private float InitialTime;
 
     public Transform PlayerTransform { get; private set; }
@@ -23,31 +25,46 @@ public class GameManager : MonoBehaviour
         get
         {
             var totalEnemies = _activeEnemies.Count;
-            return Mathf.Lerp(0.25f, 0.1f, (float)totalEnemies/10);
+            return Mathf.Lerp(0.25f, 0.1f, (float)totalEnemies / 10);
         }
     }
-    
+
     public static GameManager Instance;
-    private static List<Enemy> _activeEnemies = new List<Enemy>();
+    public static List<Enemy> _activeEnemies = new();
+    public static List<Weapon> _pickableWeapons;
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
         }
-        else if(Instance !=this) 
+        else if (Instance != this)
         {
             Destroy(Instance);
             Instance = this;
         }
+        _pickableWeapons = new();
+        _pickableWeapons.AddRange(pickableWeapons);
         SpawnPlayer();
         StartCoroutine(SpawnLogic());
     }
     private void SpawnPlayer()
     {
-        Player player = Instantiate(PlayerPrefab, Vector3.zero, Quaternion.identity);
+        Player player = Instantiate(PlayerPrefab, Vector3.up * 10f + Vector3.right *10f, Quaternion.identity); ;
+
         player.SetData(Camera.main);
         PlayerTransform = player.transform;
+        SpawnBoss();
+    }
+
+    private void SpawnBoss()
+    {
+        EnemyBoss boss = Instantiate(EnemyBossPrefab, Vector3.zero, Quaternion.identity);
+    }
+
+    private void Update()
+    {
+        Debug.Log(_pickableWeapons.Count);
     }
 
     private IEnumerator SpawnLogic()

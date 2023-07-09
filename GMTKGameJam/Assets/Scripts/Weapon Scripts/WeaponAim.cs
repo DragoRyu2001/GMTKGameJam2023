@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class WeaponAim : MonoBehaviour
 {
+    public int WeaponCapacity;
+
     [SerializeField] private List<Weapon> weaponList;
     [SerializeField] private float orbitRadius;
     [SerializeField] private float lerpRate;
-    private Camera cam;
 
-    private Vector2 mousePosition;
     private float radAngle;
     private float phaseDiff;
     public int WeaponCount { get => weaponList.Count;}
@@ -17,12 +17,11 @@ public class WeaponAim : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        weaponList.Capacity = 4;
+        weaponList.Capacity = WeaponCapacity;
     }
 
     void Start()
     {
-        cam = Camera.main;
         if (weaponList.Count > 0)
         {
             phaseDiff = 2f * Mathf.PI / weaponList.Count;
@@ -68,7 +67,7 @@ public class WeaponAim : MonoBehaviour
 
     public void AddWeapon(Weapon weapon)
     {
-        if (weaponList.Count < 4)
+        if (weaponList.Count < WeaponCapacity)
         {
             weaponList.Add(weapon);
         }
@@ -78,6 +77,7 @@ public class WeaponAim : MonoBehaviour
             weaponList.Add(weapon);
 
         }
+        GameManager._pickableWeapons.Remove(weapon);
         weapon.OnDecay += RemoveWeapon;
         phaseDiff = 2f * Mathf.PI / weaponList.Count;
         print(phaseDiff * Mathf.Rad2Deg);

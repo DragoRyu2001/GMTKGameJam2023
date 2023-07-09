@@ -101,12 +101,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 885dbde14a0ba204b8bd96301e5579ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  muzzle: {fileID: 1566305482792824505}
-  stats: {fileID: 11400000, guid: 4237ab00dcc7e8244b28643415b67774, type: 2}
-  bulletStats: {fileID: 11400000, guid: 37474bba3bc2b7940bd3a9bf7ec8b86f, type: 2}
-  pickBox: {fileID: 2179829479682367352}
-  durability: 5
-  pickable: 1
+  Muzzle: {fileID: 1566305482792824505}
+  Stats: {fileID: 11400000, guid: 4237ab00dcc7e8244b28643415b67774, type: 2}
+  BulletStats: {fileID: 11400000, guid: 37474bba3bc2b7940bd3a9bf7ec8b86f, type: 2}
+  PickBox: {fileID: 2179829479682367352}
+  TimeBetweenShots: 0
+  Durability: 35
+  Pickable: 1
 --- !u!61 &8668496185018657999
 BoxCollider2D:
   m_ObjectHideFlags: 0

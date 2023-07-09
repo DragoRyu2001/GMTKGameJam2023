@@ -34,7 +34,6 @@ namespace Entities
         private void Update()
         {
             if (!_canUpdate) return;
-            Debug.Log("Updating: "+_canUpdate);
             MovementLogic();
             DamageLogic();
             PickUpWeapon();

@@ -26,6 +26,12 @@ public class PlayerStats : MonoBehaviour
         }
     }
 
+    public float GetBaseDurability(Weapon weapon)
+    {
+        var progression = GetProgression(weapon.GetType());       
+        return progression.DurabilityProgression[0];
+    }
+
     public float GetPlayerHealth()
     {
         var level = PlayerPrefsManager.Player.GetDurabilityLevel();

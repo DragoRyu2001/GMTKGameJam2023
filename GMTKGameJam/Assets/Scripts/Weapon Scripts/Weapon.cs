@@ -27,6 +27,7 @@ public abstract class Weapon : MonoBehaviour
     [FormerlySerializedAs("pickBox")] public CircleCollider2D PickBox;
     [FormerlySerializedAs("timeBetweenShots")] public float TimeBetweenShots;
     [FormerlySerializedAs("durability")] public float Durability;
+    
     [FormerlySerializedAs("pickable")] public bool Pickable;
 
     protected Owner Owner;
@@ -54,8 +55,8 @@ public abstract class Weapon : MonoBehaviour
     protected void Decay()
     {
         if (!_startDecay) return;
-        
-        Durability--;
+
+        Durability --;
         
         if (Durability > 0) return;
         
@@ -73,14 +74,15 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    public void OnPickup(Owner pickedUpBy, float damageMultiplier, float durability)
+    public void OnPickup(Owner pickedUpBy, float damageMultiplier, float Durability)
     {
         _startDecay = true;
         Owner = pickedUpBy;
         Pickable = false;
         PickBox.enabled = false;
         DamageMultiplier = damageMultiplier;
-        Durability = durability;
+        this.Durability = (int)Durability;
+        GameManager._pickableWeapons.Remove(this);
     }
 
 }

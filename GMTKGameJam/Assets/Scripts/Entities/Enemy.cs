@@ -1,13 +1,7 @@
 using DragoRyu.DevTools;
-using DragoRyu.Utilities;
-using Entities;
 using Interfaces;
 using SODefinitions;
-using System;
-using System.Net.NetworkInformation;
 using UnityEngine;
-using UnityEngine.AI;
-using UnityEngine.TextCore.Text;
 using Random = UnityEngine.Random;
 
 public enum EnemyStates
@@ -40,6 +34,7 @@ public class Enemy : MonoBehaviour, IDamageable
             {
                 weapon.StopFiring();
                 weapon.Pickable = true;
+                GameManager._pickableWeapons.Add(weapon);
                 pickBox.enabled = true;
                 hitbox.enabled = false;
                 gameObject.layer = LayerMask.NameToLayer("Pickable");
@@ -65,10 +60,6 @@ public class Enemy : MonoBehaviour, IDamageable
         if (Alive)
         {
             TrackDistance();   
-        }
-        if(Input.GetKeyDown(KeyCode.K))
-        {
-            Kill();
         }
     }
 
@@ -101,7 +92,7 @@ public class Enemy : MonoBehaviour, IDamageable
 
     private void StartAttack()
     {
-        enemyState |= EnemyStates.ATTACK;
+        enemyState = EnemyStates.ATTACK;
         movement.EndMove();
         fireTrigger.ResetTrigger();
     }

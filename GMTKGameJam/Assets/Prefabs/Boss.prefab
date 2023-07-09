@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 577724533564620598}
   - component: {fileID: 6132359639946898867}
   - component: {fileID: 2495891923390642184}
-  - component: {fileID: 7349540204872395147}
   - component: {fileID: 3617278122931746083}
-  - component: {fileID: 2616403299397759372}
+  - component: {fileID: 7501078631126082588}
+  - component: {fileID: 4794952180631432003}
   - component: {fileID: -7938306220048566335}
-  m_Layer: 6
-  m_Name: Character
+  m_Layer: 7
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,7 +31,7 @@ Transform:
   m_GameObject: {fileID: 7607320197757482071}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -7.18, y: -2.68, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
@@ -97,7 +97,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7607320197757482071}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -116,20 +116,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7349540204872395147
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7607320197757482071}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09443de903ad03b49b97eb8bd65e5c4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tolerance: 0.25
-  stats: {fileID: 11400000, guid: e681dad3848188a488517faa8a8cb203, type: 2}
 --- !u!114 &3617278122931746083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,11 +128,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d40fee3d62f1a44b8004230b70267e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponCapacity: 4
+  WeaponCapacity: 5
   weaponList: []
-  orbitRadius: 2.65
-  lerpRate: 0.125
---- !u!114 &2616403299397759372
+  orbitRadius: 3.55
+  lerpRate: 0.1
+--- !u!114 &7501078631126082588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -155,10 +141,34 @@ MonoBehaviour:
   m_GameObject: {fileID: 7607320197757482071}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d469e831bd2d41148bed73cfbd9b47af, type: 3}
+  m_Script: {fileID: 11500000, guid: aaf4ff97af62f484e97c96ac559e0519, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CharacterSo: {fileID: 11400000, guid: e681dad3848188a488517faa8a8cb203, type: 2}
+  CharacterSo: {fileID: 11400000, guid: 0bc2e28279218b64fa75d1c5ecb0805a, type: 2}
+  State: 0
+  HuntChance:
+  - 100
+  - 100
+  - 50
+  - 20
+  - 0
+  ScavengeTime: 15
+  TotalHuntTime: 60
+--- !u!114 &4794952180631432003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7607320197757482071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c7b6f1adee81454585299081e436e6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  destination: {fileID: 0}
+  acceleration: 1
+  velocity: 0
 --- !u!61 &-7938306220048566335
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676da759d04d8ef419ca72bb004ebd70, type: 3}
-  m_Name: Sniper
+  m_Script: {fileID: 11500000, guid: 1c37ad17e33b6824ab795719071d2a4d, type: 3}
+  m_Name: BossSO
   m_EditorClassIdentifier: 
-  FireRate: 0.75
-  BulletSpeedMultiplier: 3
-  WeaponDamage: 10
+  BaseHealth: 2000
+  MoveSpeed: 3
+  CharDamageMultiplier: 0.2
+  EngagementDistance: 10
+  ExitDistance: 15
