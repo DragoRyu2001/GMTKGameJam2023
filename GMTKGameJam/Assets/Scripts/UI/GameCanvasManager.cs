@@ -96,5 +96,10 @@ namespace UI
             Time.timeScale = open ? 0f : 1f;
             PauseScreen.SetActive(open);
         }
+
+        public void ReloadScene()
+        {
+            GameSceneManager.Instance.ReloadScene();
+        }
     }
 }

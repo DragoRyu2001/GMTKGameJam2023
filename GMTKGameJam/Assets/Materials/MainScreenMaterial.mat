@@ -31,5 +31,5 @@ Material:
     m_Floats:
     - uvSize: 5
     m_Colors:
-    - _Area: {r: 0.15467931, g: 0.24803557, b: 1, a: 0.5625}
+    - _Area: {r: 0.053389005, g: 0.062201433, b: 1, a: 0.5625}
   m_BuildTextureStacks: []

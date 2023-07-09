@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using SODefinitions;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -11,6 +12,7 @@ namespace UI
 {
     public class UpgradeManager : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI Coins;
         [Header("Pages")] 
         [SerializeField] 
         private List<GameObject> PageList;
@@ -29,6 +31,7 @@ namespace UI
         private void OnEnable()
         {
             stats = PlayerStats.Instance;
+            UpdateCoins();
             SetAllSliders();
         }
         private void SetAllSliders()
@@ -85,6 +88,7 @@ namespace UI
             PlayerPrefsManager.DecreaseCoins(10);
             PlayerPrefsManager.Assault.UpgradeDamage();
             SetAssaultSliders();
+            UpdateCoins();
         }
 
         public void UpgradeAssaultDurability()
@@ -94,6 +98,7 @@ namespace UI
             PlayerPrefsManager.DecreaseCoins(10);
             PlayerPrefsManager.Assault.UpgradeDurability();
             SetAssaultSliders();
+            UpdateCoins();
         }
 
         public void UpgradeDMRDamage()
@@ -103,6 +108,7 @@ namespace UI
             PlayerPrefsManager.DecreaseCoins(10);
             PlayerPrefsManager.DMR.UpgradeDamage();
             SetDMRSliders();
+            UpdateCoins();
         }
 
         public void UpgradeDMRDurabilty()
@@ -112,6 +118,7 @@ namespace UI
             PlayerPrefsManager.DecreaseCoins(10);
             PlayerPrefsManager.DMR.UpgradeDurability();
             SetDMRSliders();
+            UpdateCoins();
         }
 
         public void UpgradeSMGDamage()
@@ -121,6 +128,7 @@ namespace UI
             PlayerPrefsManager.DecreaseCoins(10);
             PlayerPrefsManager.SMG.UpgradeDamage();
             SetSMGSliders();
+            UpdateCoins();
         }
 
         public void UpgradeSMGDurability()
@@ -130,6 +138,7 @@ namespace UI
             PlayerPrefsManager.DecreaseCoins(10);
             PlayerPrefsManager.SMG.UpgradeDurability();
             SetSMGSliders();
+            UpdateCoins();
         }
 
         public void UpgradePlayerHealth()
@@ -139,6 +148,7 @@ namespace UI
             PlayerPrefsManager.DecreaseCoins(10);
             PlayerPrefsManager.Player.UpgradeDurability();
             SetPlayerSliders();
+            UpdateCoins();
         }
 
         public void UpgradePlayerDash()
@@ -148,18 +158,19 @@ namespace UI
             PlayerPrefsManager.DecreaseCoins(10);
             PlayerPrefsManager.Player.UpgradeDamage();
             SetPlayerSliders();
+            UpdateCoins();
         }
-
-        private bool CanUpgrade()
-        {
-            //return PlayerPrefsManager.GetCoins();
-            return true;
-        }
+        
         #endregion
         
         private void SetSlider(Slider slider, int total, int level)
         {
             slider.value = (float)level / (float)total;
+        }
+
+        private void UpdateCoins()
+        {
+            Coins.text = "Data Collected: " + PlayerPrefsManager.GetCoins();
         }
     }
 }

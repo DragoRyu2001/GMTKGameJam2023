@@ -94,6 +94,7 @@ namespace Entities
                 Weapon availableWeapon = AvailableWeapons[0];
                 SetWeaponStat(availableWeapon);
                 WeaponAimSystem.AddWeapon(availableWeapon);
+                PlayerPrefsManager.IncreaseCoins(10);
             }
         }
 

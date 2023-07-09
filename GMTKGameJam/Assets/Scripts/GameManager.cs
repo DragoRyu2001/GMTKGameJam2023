@@ -96,6 +96,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(.5f*60f);
         EnemyBoss boss = Instantiate(EnemyBossPrefab, GetEnemySpawnPosition(), Quaternion.identity);
+        BossTransform = boss.transform;
         BossPhase.SafeInvoke();
         
     }
