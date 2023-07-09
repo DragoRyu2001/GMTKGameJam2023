@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DamageProgression: []
   DurabilityProgression:
-  - 500
-  - 550
-  - 625
-  - 725
-  - 1000
+  - 0
+  - 125
+  - 150
+  - 175
+  - 200

@@ -12,7 +12,7 @@ namespace Entities
         protected WeaponAim WeaponAimSystem;
         protected List<Weapon> AvailableWeapons = new();
         
-        protected float Health;
+        protected float Health = 0;
         private bool _canUpdate;
         public void TakeDamage(float damage)
         {
@@ -41,7 +41,7 @@ namespace Entities
 
         protected virtual void SetData()
         {
-            Health = CharacterSo.BaseHealth;
+            Health += CharacterSo.BaseHealth;
             if (TryGetComponent(out WeaponAim aim))
             {
                 WeaponAimSystem = aim;

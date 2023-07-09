@@ -17,7 +17,7 @@ public enum Owner
 
 public abstract class Weapon : MonoBehaviour
 {
-    public float DamageMultiplier { get; private set; }
+    public float DamageMultiplier = 1f;
     
     public Action<Weapon> OnDecay;
     
