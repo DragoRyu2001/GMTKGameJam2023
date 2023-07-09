@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour, IDamageable
             {
                 weapon.StopFiring();
                 weapon.Pickable = true;
-                GameManager._pickableWeapons.Add(weapon);
+                GameManager.PickableWeapons.Add(weapon);
                 pickBox.enabled = true;
                 hitbox.enabled = false;
                 gameObject.layer = LayerMask.NameToLayer("Pickable");

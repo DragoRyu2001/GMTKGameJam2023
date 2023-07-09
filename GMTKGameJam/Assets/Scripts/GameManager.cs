@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -12,26 +13,28 @@ public class GameManager : MonoBehaviour
     [SerializeField] private EnemyBoss EnemyBossPrefab;
     [SerializeField] private WeightedRandom<Enemy> EnemyPrefabs;
     [SerializeField] private NumberRange SpawnRange;
-    [SerializeField] private List<Weapon> pickableWeapons;
+    [SerializeField] private Weapon FirstWeaponPickup;
+    [FormerlySerializedAs("pickableWeapons")] [SerializeField] private List<Weapon> pickableWeapons;
     [Range(0.1f, 10)]
     [SerializeField]
     private float InitialTime;
 
     public Transform PlayerTransform { get; private set; }
     public Action PlayerDeath;
-
+    public Action GameStart;
+    public Action BossPhase;
     public float DropChance
     {
         get
         {
-            var totalEnemies = _activeEnemies.Count;
+            var totalEnemies = ActiveEnemies.Count;
             return Mathf.Lerp(0.5f, 0.1f, (float)totalEnemies/10);
         }
     }
 
     public static GameManager Instance;
-    public static List<Enemy> _activeEnemies = new();
-    public static List<Weapon> _pickableWeapons;
+    public static readonly List<Enemy> ActiveEnemies = new();
+    public static List<Weapon> PickableWeapons;
     private void Awake()
     {
         if (Instance == null)
@@ -43,25 +46,29 @@ public class GameManager : MonoBehaviour
             Destroy(Instance);
             Instance = this;
         }
-        _pickableWeapons = new();
-        _pickableWeapons.AddRange(pickableWeapons);
-        SpawnPlayer();
-        StartCoroutine(SpawnLogic());
+        PickableWeapons = new();
+        PickableWeapons.AddRange(PickableWeapons);
     }
+
+    private void Start()
+    {
+        SpawnPlayer();
+        FirstWeaponPickup.OnPickupEvent += StartGame;
+    }
+
+    private void StartGame()
+    {
+        GameStart.SafeInvoke();
+        StartCoroutine(SpawnLogic());
+        StartCoroutine(SpawnBossTimer());
+    }
+
     private void SpawnPlayer()
     {
         Player player = Instantiate(PlayerPrefab, Vector3.up * 10f + Vector3.right *10f, Quaternion.identity); ;
-
         player.SetData(Camera.main);
         PlayerTransform = player.transform;
-        StartCoroutine(SpawnBoss());
     }
-
-    private void Update()
-    {
-        Debug.Log(_pickableWeapons.Count);
-    }
-
     private IEnumerator SpawnLogic()
     {
         yield return null;
@@ -80,27 +87,36 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private IEnumerator SpawnBoss()
+    private IEnumerator SpawnBossTimer()
     {
-        yield return null;
-        EnemyBoss boss = Instantiate(EnemyBossPrefab, Vector3.zero, Quaternion.identity);
+        yield return new WaitForSeconds(.5f*60f);
+        EnemyBoss boss = Instantiate(EnemyBossPrefab, GetEnemySpawnPosition(), Quaternion.identity);
+        BossPhase.SafeInvoke();
+        
     }
     private void SpawnEnemy()
     {
-        if (PlayerTransform == null) return;
+        Vector2 cartPosition = GetEnemySpawnPosition();
+        var obj = EnemyPrefabs.GetWeightedRandom();
+        var enemy = Instantiate(obj, cartPosition, Quaternion.identity);
+        ActiveEnemies.Add(enemy);
+    }
+
+    private Vector2 GetEnemySpawnPosition()
+    {
+        if (PlayerTransform == null) return Vector2.zero;
         var origin = PlayerTransform.position;
         float angle = Random.Range(0, 360f) * Mathf.Deg2Rad;
         float distance = Random.Range(SpawnRange.Min, SpawnRange.Max);
         Vector2 cartPosition;
         cartPosition.x = distance * Mathf.Cos(angle);
         cartPosition.y = distance * Mathf.Sin(angle);
-        var obj = EnemyPrefabs.GetWeightedRandom();
-        var enemy = Instantiate(obj, cartPosition, Quaternion.identity);
-        _activeEnemies.Add(enemy);
+        return cartPosition;
     }
+
     public void EnemyDied(Enemy enemy)
     {
-        _activeEnemies.Remove(enemy);
+        ActiveEnemies.Remove(enemy);
     }
     public void PlayerDied()
     {

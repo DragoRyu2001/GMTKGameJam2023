@@ -5,10 +5,10 @@ using UnityEngine;
 
 public static class PlayerPrefsManager
 {
-    public static EntityLevel Player = new EntityLevel("Player");
-    public static EntityLevel Assault = new EntityLevel("Assault");
-    public static EntityLevel DMR = new EntityLevel("DMR");
-    public static EntityLevel SMG = new EntityLevel("SMG");
+    public static readonly EntityLevel Player  = new EntityLevel("Player");
+    public static readonly EntityLevel Assault = new EntityLevel("Assault");
+    public static readonly EntityLevel DMR     = new EntityLevel("DMR");
+    public static readonly EntityLevel SMG     = new EntityLevel("SMG");
 
     public static EntityLevel GetWeaponEntity(Type weapon)
     {

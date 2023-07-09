@@ -148,10 +148,10 @@ public class EnemyBoss : AdaptiveFighterClass
     private IEnumerator Scavenge()
     {
         trackDistance = true;
-        if(GameManager._pickableWeapons.Count!=0)
+        if(GameManager.PickableWeapons.Count!=0)
         {
             Debug.Log("Called again");
-            Weapon w = GameManager._pickableWeapons[^1];
+            Weapon w = GameManager.PickableWeapons[^1];
             WeaponAimSystem.AddWeapon(w);
             w.OnPickup(Owner.BOSS, CharacterSo.CharDamageMultiplier, PlayerStats.Instance.GetBaseDurability(w));
 
@@ -160,7 +160,7 @@ public class EnemyBoss : AdaptiveFighterClass
             yield break;
         }
 
-        target = GameManager._activeEnemies[UnityEngine.Random.Range(0, GameManager._activeEnemies.Count - 1)].transform;
+        target = GameManager.ActiveEnemies[UnityEngine.Random.Range(0, GameManager.ActiveEnemies.Count - 1)].transform;
         Debug.Log("Picking Random");   
 
         targetEnemy = target.GetComponent<Enemy>();

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9eadd45958d962443946cafa6b06d5f1, type: 3}
-  m_Name: DMRProgression
+  m_Name: SniperSniperProgression
   m_EditorClassIdentifier: 
   DamageProgression:
   - 1
@@ -18,9 +18,11 @@ MonoBehaviour:
   - 1.5
   - 1.75
   - 2
+  DamageCost: 0a00000019000000280000003c0000004b000000
   DurabilityProgression:
   - 20
   - 30
   - 45
   - 65
   - 95
+  DurabilityCost: 0a000000140000001e0000002800000032000000

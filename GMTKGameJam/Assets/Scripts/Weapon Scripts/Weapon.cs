@@ -20,7 +20,7 @@ public abstract class Weapon : MonoBehaviour
     public float DamageMultiplier = 1f;
     
     public Action<Weapon> OnDecay;
-    
+    public Action OnPickupEvent;
     [FormerlySerializedAs("muzzle")] public Transform Muzzle;
     [FormerlySerializedAs("stats")] public WeaponSO Stats;
     [FormerlySerializedAs("bulletStats")] public BulletSO BulletStats;
@@ -81,7 +81,8 @@ public abstract class Weapon : MonoBehaviour
         PickBox.enabled = false;
         DamageMultiplier = damageMultiplier;
         this.Durability = (int)Durability;
-        GameManager._pickableWeapons.Remove(this);
+        GameManager.PickableWeapons.Remove(this);
+        OnPickupEvent.SafeInvoke();
     }
 
 }

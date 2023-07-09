@@ -8,6 +8,8 @@ namespace SODefinitions
     public class ProgressionSO : ScriptableObject
     {
         public List<float> DamageProgression;
+        public List<int>   DamageCost;
         public List<float> DurabilityProgression;
+        public List<int>   DurabilityCost;
     }
 }
