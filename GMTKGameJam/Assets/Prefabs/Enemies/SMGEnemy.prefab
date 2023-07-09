@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8668496185018657999}
   - component: {fileID: 2179829479682367352}
   - component: {fileID: 7655460290257192758}
+  - component: {fileID: -8196008846328805772}
   m_Layer: 7
   m_Name: SMGEnemy
   m_TagString: Untagged
@@ -257,6 +258,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &-8196008846328805772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4963547742232792418}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e30e6aa55bda0043916812d03de6801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fill: {fileID: 0}
 --- !u!1 &5484581763294511008
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +323,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: -876546973899608171, guid: 4ab1660feab6e384199fd1532569695b, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

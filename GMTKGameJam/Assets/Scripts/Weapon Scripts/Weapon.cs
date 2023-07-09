@@ -34,6 +34,9 @@ public abstract class Weapon : MonoBehaviour
     protected bool Firing;
     
     private bool _startDecay;
+    private HealthMatManager healthManager;
+    private bool lerpComplete;
+    private float baseDurability;
     
     public virtual void StartFiring()
     {
@@ -57,6 +60,8 @@ public abstract class Weapon : MonoBehaviour
         if (!_startDecay) return;
 
         Durability --;
+        if (lerpComplete)
+            healthManager.UpdateHealthShader(Durability / baseDurability);
         
         if (Durability > 0) return;
         
@@ -75,13 +80,26 @@ public abstract class Weapon : MonoBehaviour
 
     public void OnPickup(Owner pickedUpBy, float fireRateMultiplier, float Durability)
     {
+        StartCoroutine(RefillHealth());
         _startDecay = true;
         Owner = pickedUpBy;
         Pickable = false;
         PickBox.enabled = false;
         FireRateMultiplier = fireRateMultiplier;
-        this.Durability = (int)Durability;
+        baseDurability = this.Durability = (int)Durability;
         GameManager._pickableWeapons.Remove(this);
     }
 
+    private IEnumerator RefillHealth()
+    {
+        healthManager = GetComponent<HealthMatManager>();
+        float elapsedTime = 0f;
+        while (elapsedTime < (Durability / baseDurability))
+        {
+            yield return null;
+            elapsedTime+=Time.deltaTime/2f;
+            healthManager.UpdateHealthShader(elapsedTime);
+        }
+        lerpComplete = true;
+    }
 }
