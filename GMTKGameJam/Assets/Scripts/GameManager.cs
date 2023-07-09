@@ -126,7 +126,6 @@ public class GameManager : MonoBehaviour
     }
     public void PlayerDied(Type type)
     {
-        if (type != typeof(Player)) return;
         StopAllCoroutines();
         PlayerDeath.SafeInvoke();
     }
