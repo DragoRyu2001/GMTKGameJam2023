@@ -18,7 +18,7 @@ public class Bullet : MonoBehaviour
     {
         _bulletSO = bulletSO;
         _sprite = GetBulletSprite(weapon.GetType());
-        _damage = bulletSO.BaseDamage * weapon.DamageMultiplier;
+        _damage = bulletSO.BaseDamage;
         _canMove = true;
         SetLayer(owner);
         Destroy(gameObject, 5f);

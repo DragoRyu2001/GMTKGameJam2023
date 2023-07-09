@@ -17,7 +17,7 @@ public enum Owner
 
 public abstract class Weapon : MonoBehaviour
 {
-    public float DamageMultiplier = 1f;
+    public float FireRateMultiplier = 1f;
     
     public Action<Weapon> OnDecay;
     
@@ -73,13 +73,13 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    public void OnPickup(Owner pickedUpBy, float damageMultiplier, float Durability)
+    public void OnPickup(Owner pickedUpBy, float fireRateMultiplier, float Durability)
     {
         _startDecay = true;
         Owner = pickedUpBy;
         Pickable = false;
         PickBox.enabled = false;
-        DamageMultiplier = damageMultiplier;
+        FireRateMultiplier = fireRateMultiplier;
         this.Durability = (int)Durability;
         GameManager._pickableWeapons.Remove(this);
     }

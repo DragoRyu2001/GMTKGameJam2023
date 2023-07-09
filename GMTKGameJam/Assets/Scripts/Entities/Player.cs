@@ -48,7 +48,7 @@ namespace Entities
 
         private static void SetWeaponStat(Weapon availableWeapon)
         {
-            float multiplier = PlayerStats.Instance.GetDamageMultiplier(availableWeapon);
+            float multiplier = PlayerStats.Instance.GetFireRateMultiplier(availableWeapon);
             float durability = PlayerStats.Instance.GetDurability(availableWeapon);
             availableWeapon.OnPickup(Owner.PLAYER, multiplier, PlayerStats.Instance.GetDurability(availableWeapon));
         }

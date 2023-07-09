@@ -38,7 +38,7 @@ namespace UI
         private void SetSMGSliders()
         {
             ProgressionSO SMGStats = stats.GetProgression(typeof(SMG));
-            SetSlider(SMGDamageProgression, SMGStats.DamageProgression.Count, PlayerPrefsManager.SMG.GetDamageLevel());
+            SetSlider(SMGDamageProgression, SMGStats.FireRateProgression.Count, PlayerPrefsManager.SMG.GetFireRateLevel());
             SetSlider(SMGDurabilityProgression, SMGStats.DurabilityProgression.Count,
                 PlayerPrefsManager.SMG.GetDurabilityLevel());
         }
@@ -46,8 +46,8 @@ namespace UI
         private void SetDMRSliders()
         {
             ProgressionSO DMRStats = stats.GetProgression(typeof(Sniper));
-            SetSlider(DMRDamageProgression, DMRStats.DamageProgression.Count,
-                PlayerPrefsManager.DMR.GetDamageLevel());
+            SetSlider(DMRDamageProgression, DMRStats.FireRateProgression.Count,
+                PlayerPrefsManager.DMR.GetFireRateLevel());
             SetSlider(DMRDurabilityProgression, DMRStats.DurabilityProgression.Count,
                 PlayerPrefsManager.DMR.GetDurabilityLevel());
         }
@@ -55,8 +55,8 @@ namespace UI
         private void SetAssaultSliders()
         {
             ProgressionSO AssaultStats = stats.GetProgression(typeof(Assault));
-            SetSlider(AssaultDamageProgression, AssaultStats.DamageProgression.Count,
-                PlayerPrefsManager.Assault.GetDamageLevel());
+            SetSlider(AssaultDamageProgression, AssaultStats.FireRateProgression.Count,
+                PlayerPrefsManager.Assault.GetFireRateLevel());
             SetSlider(AssaultDurabilityProgression,
                 AssaultStats.DurabilityProgression.Count,
                 PlayerPrefsManager.Assault.GetDurabilityLevel());

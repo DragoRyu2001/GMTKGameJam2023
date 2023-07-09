@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace SODefinitions
 {
@@ -7,7 +8,7 @@ namespace SODefinitions
     // ReSharper disable once InconsistentNaming
     public class ProgressionSO : ScriptableObject
     {
-        public List<float> DamageProgression;
+        public List<float> FireRateProgression;
         public List<float> DurabilityProgression;
     }
 }
