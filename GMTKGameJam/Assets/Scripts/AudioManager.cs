@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +5,7 @@ using UnityEngine;
 public class AudioManager : MonoBehaviour
 {
     public AudioSource musicSource;
+    [SerializeField] private List<AudioClip> clips;
     public static AudioManager Instance;
 
     public bool SFXMuted;
@@ -25,6 +25,7 @@ public class AudioManager : MonoBehaviour
         DontDestroyOnLoad(Instance);
         musicSource.volume = 0.8f;
         SFXVolume = 0.8f;
+        StartCoroutine(LoopMusic());
     }
 
     public void SetMusicVolume(float value)
@@ -46,5 +47,18 @@ public class AudioManager : MonoBehaviour
     public void MuteUnmuteMusic(bool mute)
     {
         musicSource.mute = mute;
+    }
+
+    private IEnumerator LoopMusic()
+    {
+        int i = 0;
+        while (true)
+        {
+            musicSource.clip = clips[i];
+            i = (i + 1) % clips.Count;
+            musicSource.Play();
+            //yield return null;
+            yield return new WaitUntil(() => !musicSource.isPlaying);
+        }
     }
 }

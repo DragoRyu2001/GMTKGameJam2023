@@ -1024,6 +1024,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musicSource: {fileID: 1224331133}
+  clips:
+  - {fileID: 8300000, guid: 6ebc09c900af5ce4983b9cb50fdc80e7, type: 3}
+  - {fileID: 8300000, guid: 3b4f081989b4c8f42a24d81f801b734a, type: 3}
+  - {fileID: 8300000, guid: 816e8041254e26a479a5941131203b47, type: 3}
   SFXMuted: 0
   SFXVolume: 0
 --- !u!82 &1224331133
@@ -1036,8 +1040,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 3b4f081989b4c8f42a24d81f801b734a, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
