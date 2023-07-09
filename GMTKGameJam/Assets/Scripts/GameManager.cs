@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Weapon FirstWeaponPickup;
     [SerializeField] private CinemachineVirtualCamera VirtualCamera;
     [FormerlySerializedAs("pickableWeapons")] [SerializeField] private List<Weapon> pickableWeapons;
+    [SerializeField] private GameCanvasManager _canvasManager;
     [Range(0.1f, 10)]
     [SerializeField]
     private float InitialTime;
@@ -122,8 +124,9 @@ public class GameManager : MonoBehaviour
     {
         ActiveEnemies.Remove(enemy);
     }
-    public void PlayerDied()
+    public void PlayerDied(Type type)
     {
+        if (type != typeof(Player)) return;
         StopAllCoroutines();
         PlayerDeath.SafeInvoke();
     }
