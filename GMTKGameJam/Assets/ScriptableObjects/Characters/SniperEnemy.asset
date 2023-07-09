@@ -15,5 +15,5 @@ MonoBehaviour:
   BaseHealth: 10
   MoveSpeed: 4.5
   CharDamageMultiplier: 1.5
-  EngagementDistance: 7.5
-  ExitDistance: 12.5
+  EngagementDistance: 17
+  ExitDistance: 22

@@ -153,7 +153,7 @@ public class EnemyBoss : AdaptiveFighterClass
             Debug.Log("Called again");
             Weapon w = GameManager.PickableWeapons[^1];
             WeaponAimSystem.AddWeapon(w);
-            w.OnPickup(Owner.BOSS, CharacterSo.CharDamageMultiplier, PlayerStats.Instance.GetBaseDurability(w));
+            w.OnPickup(Owner.BOSS, CharacterSo.CharDamageMultiplier, PlayerStats.Instance.GetBaseDurability(w), 0.5f);
 
             SetState();
             inAction = false;

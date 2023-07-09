@@ -1,9 +1,5 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Interfaces;
 using SODefinitions;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -18,7 +14,7 @@ public class Bullet : MonoBehaviour
     {
         _bulletSO = bulletSO;
         _sprite = GetBulletSprite(weapon.GetType());
-        _damage = bulletSO.BaseDamage;
+        _damage = bulletSO.BaseDamage*weapon.damageMultiplier;
         _canMove = true;
         SetLayer(owner);
         Destroy(gameObject, 5f);

@@ -1585,6 +1585,7 @@ MonoBehaviour:
   health: 0
   distanceToPlayer: 0
   alive: 1
+  particleSystem: {fileID: 0}
   playerTransform: {fileID: 0}
 --- !u!114 &1027062537
 MonoBehaviour:
@@ -1606,6 +1607,7 @@ MonoBehaviour:
   TimeBetweenShots: 0
   Durability: 5
   Pickable: 0
+  damageMultiplier: 0
 --- !u!61 &1027062539
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2084,6 +2086,7 @@ MonoBehaviour:
   TimeBetweenShots: 0
   Durability: 0
   Pickable: 0
+  damageMultiplier: 0
 --- !u!212 &1439393558
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2190,6 +2193,7 @@ MonoBehaviour:
   TimeBetweenShots: 0
   Durability: 0
   Pickable: 0
+  damageMultiplier: 0
 --- !u!212 &1511647380
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2424,7 +2428,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   StartColor: {r: 1, g: 1, b: 1, a: 1}
   GameStartColor: {r: 0, g: 0, b: 0, a: 1}
-  BossColor: {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
+  BossColor: {r: 0.23584908, g: 0.23584908, b: 0.23584908, a: 1}
 --- !u!114 &1869314891 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3757386619353488643, guid: 554d9f1b020d0fd4ea661dbdd4709ed0, type: 3}

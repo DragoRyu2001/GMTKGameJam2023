@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c37ad17e33b6824ab795719071d2a4d, type: 3}
   m_Name: Player
   m_EditorClassIdentifier: 
-  BaseHealth: 500
+  BaseHealth: 1000
   MoveSpeed: 5
-  CharDamageMultiplier: 1
+  CharDamageMultiplier: 3
   EngagementDistance: 0
   ExitDistance: 0

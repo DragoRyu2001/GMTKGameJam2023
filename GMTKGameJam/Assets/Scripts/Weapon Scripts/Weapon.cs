@@ -37,6 +37,7 @@ public abstract class Weapon : MonoBehaviour
     private HealthMatManager healthManager;
     private bool lerpComplete;
     private float baseDurability;
+    public float damageMultiplier;
     
     public virtual void StartFiring()
     {
@@ -78,7 +79,7 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    public void OnPickup(Owner pickedUpBy, float fireRateMultiplier, float Durability)
+    public void OnPickup(Owner pickedUpBy, float fireRateMultiplier, float Durability, float damageMultiplier)
     {
         StartCoroutine(RefillHealth());
         _startDecay = true;
@@ -87,6 +88,7 @@ public abstract class Weapon : MonoBehaviour
         PickBox.enabled = false;
         FireRateMultiplier = fireRateMultiplier;
         baseDurability = this.Durability = (int)Durability;
+        this.damageMultiplier = damageMultiplier;
         GameManager.PickableWeapons.Remove(this);
         OnPickupEvent.SafeInvoke();
     }

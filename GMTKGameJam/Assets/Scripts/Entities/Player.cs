@@ -14,6 +14,7 @@ namespace Entities
         [SerializeField] private float DashCooldown;
         [SerializeField] private float NullRadius;
         [SerializeField] private float CurrentDashCooldown;
+        [SerializeField] private ParticleSystem dashParticle;
 
         private Camera _camera;
         private MovementScript _movement;
@@ -35,7 +36,9 @@ namespace Entities
 
                 Debug.Log("Dashing");
 
-                CurrentDashCooldown = DashCooldown; 
+                CurrentDashCooldown = DashCooldown;
+                dashParticle.transform.parent = null;
+                dashParticle.Play();
                 _movement.Dash();
                 Nullify();
                 StartCoroutine(StartCooldown());
@@ -56,7 +59,7 @@ namespace Entities
                 }
                 else if(coll.TryGetComponent(out _currentDamageable))
                 {
-                    _currentDamageable.TakeDamage(10);
+                    _currentDamageable.TakeDamage(5);
                 }
             }
             
@@ -69,6 +72,8 @@ namespace Entities
                 yield return null;
                 CurrentDashCooldown -= Time.deltaTime;
             }
+            dashParticle.transform.parent = transform;
+            dashParticle.transform.localPosition = Vector3.zero; 
         }
 
         //Pass in Weapon Aim Vector2 and Weapon Shoot Input
@@ -94,7 +99,7 @@ namespace Entities
                 Weapon availableWeapon = AvailableWeapons[0];
                 SetWeaponStat(availableWeapon);
                 WeaponAimSystem.AddWeapon(availableWeapon);
-                PlayerPrefsManager.IncreaseCoins(10);
+                PlayerPrefsManager.IncreaseCoins(5);
             }
         }
 
@@ -102,7 +107,7 @@ namespace Entities
         {
             float multiplier = PlayerStats.Instance.GetFireRateMultiplier(availableWeapon);
             float durability = PlayerStats.Instance.GetDurability(availableWeapon);
-            availableWeapon.OnPickup(Owner.PLAYER, multiplier, PlayerStats.Instance.GetDurability(availableWeapon));
+            availableWeapon.OnPickup(Owner.PLAYER, multiplier, PlayerStats.Instance.GetDurability(availableWeapon), 6.0f);
         }
 
         public void SetData(Camera cam)
@@ -117,6 +122,7 @@ namespace Entities
             {
                 Debug.LogError("Movement Script Could not Be found");
             }
+            dashParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
             base.SetData();
         }
     }

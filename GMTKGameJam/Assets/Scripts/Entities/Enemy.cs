@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float health;
     [SerializeField] private float distanceToPlayer;
     [SerializeField] private bool alive;
-
+    [SerializeField] private ParticleSystem particleSystem;
     private Trigger outsideRangeTrigger;
     private Trigger fireTrigger;
     private HealthMatManager healthMatManager;
@@ -104,6 +104,8 @@ public class Enemy : MonoBehaviour, IDamageable
     {
         GameManager.Instance.EnemyDied(this);
         float dice = Random.Range(0, 1f);
+        particleSystem.transform.parent = null;
+        particleSystem.Play();
         if (dice < GameManager.Instance.DropChance)
         {
             Alive = false;
