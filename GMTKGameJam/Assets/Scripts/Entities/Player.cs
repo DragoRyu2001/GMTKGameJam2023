@@ -34,8 +34,6 @@ namespace Entities
             {
                 if (CurrentDashCooldown > 0) return;
 
-                Debug.Log("Dashing");
-
                 CurrentDashCooldown = DashCooldown;
                 dashParticle.transform.parent = null;
                 dashParticle.Play();
@@ -120,7 +118,7 @@ namespace Entities
             }
             else
             {
-                Debug.LogError("Movement Script Could not Be found");
+                //Debug.LogError("Movement Script Could not Be found");
             }
             dashParticle = transform.GetChild(0).GetComponent<ParticleSystem>();
             base.SetData();

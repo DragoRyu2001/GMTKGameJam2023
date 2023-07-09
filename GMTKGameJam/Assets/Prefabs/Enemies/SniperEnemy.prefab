@@ -114,6 +114,7 @@ MonoBehaviour:
   TimeBetweenShots: 0
   Durability: 35
   Pickable: 0
+  damageMultiplier: 0
 --- !u!114 &5489055229012325670
 MonoBehaviour:
   m_ObjectHideFlags: 0

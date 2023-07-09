@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c37ad17e33b6824ab795719071d2a4d, type: 3}
   m_Name: BossSO
   m_EditorClassIdentifier: 
-  BaseHealth: 2000
+  BaseHealth: 1000
   MoveSpeed: 3
   CharDamageMultiplier: 0.2
   EngagementDistance: 13

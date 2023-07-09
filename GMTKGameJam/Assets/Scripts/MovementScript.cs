@@ -50,7 +50,6 @@ public class MovementScript : MonoBehaviour
 
     public void Dash()
     {
-        Debug.Log("Dashed");
         moveSpeed += dashImpulse;
         StartCoroutine(MoveSpeedDecay());
     }

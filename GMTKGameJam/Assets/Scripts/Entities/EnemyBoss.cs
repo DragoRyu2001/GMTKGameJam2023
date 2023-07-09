@@ -150,7 +150,6 @@ public class EnemyBoss : AdaptiveFighterClass
         trackDistance = true;
         if(GameManager.PickableWeapons.Count!=0)
         {
-            Debug.Log("Called again");
             Weapon w = GameManager.PickableWeapons[^1];
             WeaponAimSystem.AddWeapon(w);
             w.OnPickup(Owner.BOSS, CharacterSo.CharDamageMultiplier, PlayerStats.Instance.GetBaseDurability(w), 0.5f);
@@ -165,8 +164,7 @@ public class EnemyBoss : AdaptiveFighterClass
             yield return new WaitUntil(()=>GameManager.ActiveEnemies.Count > 0);
         }
 
-        target = GameManager.ActiveEnemies[UnityEngine.Random.Range(0, GameManager.ActiveEnemies.Count - 1)].transform;
-        Debug.Log("Picking Random");   
+        target = GameManager.ActiveEnemies[UnityEngine.Random.Range(0, GameManager.ActiveEnemies.Count - 1)].transform; 
 
         targetEnemy = target.GetComponent<Enemy>();
         trackDistance = true;

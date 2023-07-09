@@ -37,8 +37,11 @@ public abstract class Weapon : MonoBehaviour
     private HealthMatManager healthManager;
     private bool lerpComplete;
     private float baseDurability;
-    public float damageMultiplier;
-    
+    public float damageMultiplier=1f;
+    private void Awake()
+    {
+        damageMultiplier = 1f;   
+    }
     public virtual void StartFiring()
     {
         Firing = true;
@@ -49,6 +52,7 @@ public abstract class Weapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        if (TryGetComponent<Enemy>(out _)) return;
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player") || collision.gameObject.layer == LayerMask.NameToLayer("Boss"))
         {
             AdaptiveFighterClass fighter = collision.GetComponent<AdaptiveFighterClass>();

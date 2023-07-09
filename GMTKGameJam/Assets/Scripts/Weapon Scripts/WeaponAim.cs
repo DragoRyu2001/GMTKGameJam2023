@@ -26,7 +26,6 @@ public class WeaponAim : MonoBehaviour
         {
             phaseDiff = 2f * Mathf.PI / weaponList.Count;
         }
-        print(phaseDiff * Mathf.Rad2Deg);
     }
 
     public void AimLogic(Vector2 aimPosition)
@@ -37,6 +36,11 @@ public class WeaponAim : MonoBehaviour
         for (int i = 0; i < weaponList.Count; i++)
         {
             Weapon weapon = weaponList[i];
+            if (weapon == null)
+            {
+                weaponList.RemoveAt(i);
+                continue;
+            }
             float weaponPosAngle = radAngle + (i * phaseDiff);
             weapon.transform.position = Vector2.Lerp(weapon.transform.position,
                 (new Vector2(Mathf.Cos(weaponPosAngle), Mathf.Sin(weaponPosAngle)) * orbitRadius) + transform.position.XY(),
@@ -79,7 +83,6 @@ public class WeaponAim : MonoBehaviour
         }
         weapon.OnDecay += RemoveWeapon;
         phaseDiff = 2f * Mathf.PI / weaponList.Count;
-        print(phaseDiff * Mathf.Rad2Deg);
     }
 
     public void RemoveWeapon(Weapon weapon)
@@ -92,6 +95,7 @@ public class WeaponAim : MonoBehaviour
                 phaseDiff = 2f * Mathf.PI / weaponList.Count;
             }
         }
-        Destroy(weapon.gameObject);
+        if(weapon!=null)
+            Destroy(weapon.gameObject);
     }
 }

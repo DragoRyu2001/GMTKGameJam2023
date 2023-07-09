@@ -555,14 +555,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b27a312bb1b9b574e980131aa6fa4986, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerPrefab: {fileID: 2616403299397759372, guid: acd70e2b0dae6dc44b1602b632082aff, type: 3}
+  PlayerPrefab: {fileID: 6304313025060266333, guid: acd70e2b0dae6dc44b1602b632082aff, type: 3}
   EnemyBossPrefab: {fileID: 7501078631126082588, guid: 5ed96ebe132689643996bd7ba78f4a4a, type: 3}
   EnemyPrefabs:
     list:
-    - {fileID: 8514214841013497074, guid: 65973c7a2ca82634299cbbe7ad344bef, type: 3}
-    - {fileID: 8514214841013497074, guid: f073330e0ee0883429fe92a1fbf02c2a, type: 3}
+    - {fileID: 492879644842491580, guid: 65973c7a2ca82634299cbbe7ad344bef, type: 3}
     - {fileID: 5023772473366059138, guid: 851a0adf29e9227459c2ce9af19eba13, type: 3}
-    weights: 3c0000001e0000000a000000
+    - {fileID: 8320724494182860318, guid: f073330e0ee0883429fe92a1fbf02c2a, type: 3}
+    weights: 280000002300000019000000
   SpawnRange:
     Min: 15
     Max: 25

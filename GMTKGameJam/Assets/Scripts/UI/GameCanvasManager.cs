@@ -63,7 +63,6 @@ namespace UI
 
         private void UpdateHealthBar(float percentage)
         {
-            Debug.Log("Health percentage is: " + percentage);
             HealthBar.fillAmount = percentage;
         }
 

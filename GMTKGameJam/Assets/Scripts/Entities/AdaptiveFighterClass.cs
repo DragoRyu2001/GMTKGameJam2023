@@ -56,7 +56,7 @@ namespace Entities
             }
             else
             {
-                Debug.LogError("Does not have reference to Weapon Aim");
+                //Debug.LogError("Does not have reference to Weapon Aim");
             }
 
             _canUpdate = true;
