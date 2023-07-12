@@ -38,6 +38,7 @@ public abstract class Weapon : MonoBehaviour
     private bool lerpComplete;
     private float baseDurability;
     public float damageMultiplier=1f;
+    public GameObject lightHolder;
     private void Awake()
     {
         damageMultiplier = 1f;   
@@ -86,6 +87,7 @@ public abstract class Weapon : MonoBehaviour
     public void OnPickup(Owner pickedUpBy, float fireRateMultiplier, float Durability, float damageMultiplier)
     {
         StartCoroutine(RefillHealth());
+        lightHolder.SetActive(true);
         _startDecay = true;
         Owner = pickedUpBy;
         Pickable = false;

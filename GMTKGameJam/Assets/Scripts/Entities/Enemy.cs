@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour, IDamageable
     [SerializeField] private float distanceToPlayer;
     [SerializeField] private bool alive;
     [SerializeField] private ParticleSystem particleSystem;
+    [SerializeField] private GameObject lightHolder;
     private Trigger outsideRangeTrigger;
     private Trigger fireTrigger;
     private HealthMatManager healthMatManager;
@@ -40,6 +41,7 @@ public class Enemy : MonoBehaviour, IDamageable
                 hitbox.enabled = false;
                 gameObject.layer = LayerMask.NameToLayer("Pickable");
                 movement.KillMovement();
+                lightHolder.SetActive(true);
                 Destroy(this);
             }
         }
